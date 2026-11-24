@@ -1,0 +1,3665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PolicyPulse for Confluence Cloud — Bulk SOP Read Confirmations &amp; ISO 27001 Evidence Pack</title>
+  <script>
+    (function initQaTelemetry() {
+      const state = {
+        runtimeErrors: [],
+        unhandledRejections: [],
+        consoleErrors: [],
+        interactions: [],
+        downloads: []
+      };
+      window.__qaTelemetry = state;
+      window.addEventListener("error", function (ev) {
+        state.runtimeErrors.push({
+          message: String(ev.message || "Unknown error"),
+          line: ev.lineno || 0,
+          col: ev.colno || 0
+        });
+      });
+      window.addEventListener("unhandledrejection", function (ev) {
+        state.unhandledRejections.push(String(ev.reason || "Unhandled promise rejection"));
+      });
+      const origConsoleError = console.error.bind(console);
+      console.error = function () {
+        state.consoleErrors.push(Array.from(arguments).map(String).join(" "));
+        origConsoleError.apply(console, arguments);
+      };
+    })();
+  </script>
+  <style>
+    :root,
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg-canvas: #F7F8FA;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F1F2F4;
+      --bg-hover: #EBECF0;
+      --bg-selected: #E9F2FF;
+      --ink-primary: #172B4D;
+      --ink-secondary: #44546F;
+      --ink-muted: #626F86;
+      --border-hairline: #DCDFE4;
+      --border-strong: #B3B9C4;
+      --cobalt-primary: #0C66E4;
+      --cobalt-hover: #0055CC;
+      --cobalt-active: #09326C;
+      --cobalt-wash: #E9F2FF;
+      --cobalt-border: #85B8FF;
+      --overdue-ink: #C9372C;
+      --overdue-bg: #FFECEB;
+      --overdue-border: #FD9891;
+      --pending-ink: #7F5F01;
+      --pending-dot: #B38600;
+      --pending-bg: #FFF7D6;
+      --pending-border: #E2B203;
+      --verified-ink: #1F845A;
+      --verified-bg: #DCFFF1;
+      --verified-border: #BAF3DB;
+      --shadow-card: 0 1px 2px rgba(9, 30, 66, 0.08), 0 0 1px rgba(9, 30, 66, 0.16);
+      --shadow-elevated: 0 8px 20px rgba(9, 30, 66, 0.12), 0 0 1px rgba(9, 30, 66, 0.20);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 10px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Text", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg-canvas: #1D2125;
+        --bg-surface: #22272B;
+        --bg-subtle: #2C333A;
+        --bg-hover: #38414A;
+        --bg-selected: #1C2B41;
+        --ink-primary: #DEE4EA;
+        --ink-secondary: #9FADBC;
+        --ink-muted: #8C9BAB;
+        --border-hairline: #38414A;
+        --border-strong: #454F59;
+        --cobalt-primary: #579DFF;
+        --cobalt-hover: #85B8FF;
+        --cobalt-active: #CCE0FF;
+        --cobalt-wash: #1C2B41;
+        --cobalt-border: #388BFF;
+        --overdue-ink: #F87168;
+        --overdue-bg: #42221F;
+        --overdue-border: #AE2E24;
+        --pending-ink: #F5CD47;
+        --pending-dot: #E2B203;
+        --pending-bg: #332E1B;
+        --pending-border: #946F00;
+        --verified-ink: #4BCE97;
+        --verified-bg: #164B35;
+        --verified-border: #216E4E;
+        --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.36), 0 0 1px rgba(0, 0, 0, 0.50);
+        --shadow-elevated: 0 10px 24px rgba(0, 0, 0, 0.48), 0 0 1px rgba(0, 0, 0, 0.60);
+      }
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg-canvas: #1D2125;
+      --bg-surface: #22272B;
+      --bg-subtle: #2C333A;
+      --bg-hover: #38414A;
+      --bg-selected: #1C2B41;
+      --ink-primary: #DEE4EA;
+      --ink-secondary: #9FADBC;
+      --ink-muted: #8C9BAB;
+      --border-hairline: #38414A;
+      --border-strong: #454F59;
+      --cobalt-primary: #579DFF;
+      --cobalt-hover: #85B8FF;
+      --cobalt-active: #CCE0FF;
+      --cobalt-wash: #1C2B41;
+      --cobalt-border: #388BFF;
+      --overdue-ink: #F87168;
+      --overdue-bg: #42221F;
+      --overdue-border: #AE2E24;
+      --pending-ink: #F5CD47;
+      --pending-dot: #E2B203;
+      --pending-bg: #332E1B;
+      --pending-border: #946F00;
+      --verified-ink: #4BCE97;
+      --verified-bg: #164B35;
+      --verified-border: #216E4E;
+      --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.36), 0 0 1px rgba(0, 0, 0, 0.50);
+      --shadow-elevated: 0 10px 24px rgba(0, 0, 0, 0.48), 0 0 1px rgba(0, 0, 0, 0.60);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background: var(--bg-canvas);
+      color: var(--ink-primary);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Confluence Top Chrome */
+    .confluence-chrome {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 0 20px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .chrome-left, .chrome-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .waffle-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .confluence-wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 650;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      color: var(--ink-primary);
+      white-space: nowrap;
+    }
+
+    .chrome-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border-hairline);
+      flex-shrink: 0;
+    }
+
+    .app-identity {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .app-logo-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--cobalt-primary);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .app-name {
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .forge-trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+      background: var(--verified-bg);
+      color: var(--verified-ink);
+      border: 1px solid var(--verified-border);
+      white-space: nowrap;
+    }
+
+    .space-crumb-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      color: var(--ink-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .persona-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 3px 9px 3px 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-subtle);
+      font-size: 12px;
+      color: var(--ink-secondary);
+      white-space: nowrap;
+    }
+
+    .avatar-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--cobalt-primary);
+      color: #FFFFFF;
+      font-size: 10.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 30px;
+      padding: 0 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface);
+      color: var(--ink-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.14s ease, border-color 0.14s ease;
+      white-space: nowrap;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-strong);
+    }
+
+    /* Sub-header View Switcher */
+    .workspace-nav-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-hairline);
+      padding: 0 20px;
+    }
+
+    .workspace-nav-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .view-tabs {
+      display: flex;
+      align-items: stretch;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .view-tab-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: none;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.14s ease, background 0.14s ease;
+      white-space: nowrap;
+    }
+
+    .view-tab-btn:hover {
+      color: var(--ink-primary);
+      background: var(--bg-subtle);
+    }
+
+    .view-tab-btn[aria-selected="true"] {
+      color: var(--cobalt-primary);
+      border-bottom-color: var(--cobalt-primary);
+    }
+
+    .view-tab-btn:focus-visible {
+      outline: 2px solid var(--cobalt-primary);
+      outline-offset: -2px;
+      border-radius: var(--radius-sm);
+    }
+
+    .step-num {
+      width: 19px;
+      height: 19px;
+      border-radius: 4px;
+      background: var(--bg-subtle);
+      color: var(--ink-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .view-tab-btn[aria-selected="true"] .step-num {
+      background: var(--cobalt-wash);
+      color: var(--cobalt-primary);
+    }
+
+    .ext-point-tag {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: var(--bg-subtle);
+      color: var(--ink-muted);
+    }
+
+    .nav-status-summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      padding: 6px 0;
+    }
+
+    /* Main Shell */
+    .workspace-main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 18px 20px 28px;
+    }
+
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    /* Shared UI Primitives */
+    .surface-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      min-width: 0;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.35;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+
+    .pill-verified {
+      background: var(--verified-bg);
+      color: var(--verified-ink);
+      border-color: var(--verified-border);
+    }
+
+    .pill-pending {
+      background: var(--pending-bg);
+      color: var(--pending-ink);
+      border-color: var(--pending-border);
+    }
+
+    .pill-overdue {
+      background: var(--overdue-bg);
+      color: var(--overdue-ink);
+      border-color: var(--overdue-border);
+    }
+
+    .pill-neutral {
+      background: var(--bg-subtle);
+      color: var(--ink-secondary);
+      border-color: var(--border-hairline);
+    }
+
+    .pill-cobalt {
+      background: var(--cobalt-wash);
+      color: var(--cobalt-primary);
+      border-color: var(--cobalt-border);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .dot-verified { background: var(--verified-ink); }
+    .dot-pending { background: var(--pending-dot); }
+    .dot-overdue { background: var(--overdue-ink); }
+    .dot-cobalt { background: var(--cobalt-primary); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      height: 36px;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.14s ease, border-color 0.14s ease, transform 0.06s ease;
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: translateY(0.5px);
+    }
+
+    .btn:disabled {
+      opacity: 0.78;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary:disabled:hover {
+      background: var(--bg-surface);
+      border-color: var(--border-hairline);
+    }
+
+    .btn-primary {
+      background: var(--cobalt-primary);
+      color: #FFFFFF;
+    }
+
+    html[data-theme="dark"] .btn-primary {
+      color: #1D2125;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]) .btn-primary {
+        color: #1D2125;
+      }
+    }
+
+    .btn-primary:hover {
+      background: var(--cobalt-hover);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      color: var(--ink-primary);
+      border-color: var(--border-hairline);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-strong);
+    }
+
+    .btn-overdue {
+      background: var(--overdue-bg);
+      color: var(--overdue-ink);
+      border-color: var(--overdue-border);
+    }
+
+    .btn-overdue:hover {
+      filter: brightness(0.97);
+    }
+
+    .btn-sm {
+      height: 28px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+
+    .input-control, .select-control {
+      height: 34px;
+      padding: 0 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-hairline);
+      background-color: var(--bg-surface);
+      color: var(--ink-primary);
+      width: 100%;
+      min-width: 0;
+    }
+
+    select, .select-control {
+      padding-right: 28px;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.5L6 8l3.5-3.5' stroke='%23626F86' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 9px center;
+      background-size: 12px 12px;
+    }
+
+    .input-control:focus, .select-control:focus {
+      outline: 2px solid var(--cobalt-primary);
+      outline-offset: -1px;
+      border-color: var(--cobalt-primary);
+    }
+
+    /* VIEW 1: Bulk Policy Pack Assigner */
+    .view-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .view-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--ink-primary);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .view-subtitle {
+      margin: 4px 0 0;
+      color: var(--ink-secondary);
+      font-size: 13px;
+    }
+
+    .bulk-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.58fr) minmax(320px, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .scope-toolbar {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .scope-row-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 10px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      color: var(--ink-secondary);
+      margin-bottom: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .cql-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .cql-badge {
+      position: absolute;
+      left: 8px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: var(--cobalt-wash);
+      color: var(--cobalt-primary);
+      pointer-events: none;
+    }
+
+    .cql-input {
+      padding-left: 46px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .scope-row-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-chips {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip-btn {
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-subtle);
+      color: var(--ink-secondary);
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .chip-btn.active {
+      background: var(--cobalt-wash);
+      color: var(--cobalt-primary);
+      border-color: var(--cobalt-border);
+    }
+
+    .tree-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .tree-search-input {
+      width: 195px;
+      height: 28px;
+      font-size: 12px;
+    }
+
+    .sop-tree-container {
+      max-height: 392px;
+      overflow-y: auto;
+    }
+
+    .tree-folder-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border-hairline);
+      font-weight: 650;
+      font-size: 12.5px;
+      color: var(--ink-primary);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .folder-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .folder-toggle-btn {
+      width: 20px;
+      height: 20px;
+      border: none;
+      background: transparent;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sop-page-row {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr) auto auto;
+      align-items: center;
+      gap: 10px;
+      padding: 7.5px 16px 7.5px 34px;
+      border-bottom: 1px solid var(--border-hairline);
+      transition: background 0.12s ease;
+    }
+
+    .sop-page-row:hover {
+      background: var(--bg-subtle);
+    }
+
+    .sop-page-row.is-selected {
+      background: color-mix(in srgb, var(--cobalt-wash) 42%, var(--bg-surface));
+    }
+
+    .sop-title-cell {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sop-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      flex-shrink: 0;
+    }
+
+    .sop-title-text {
+      font-weight: 500;
+      color: var(--ink-primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .version-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: var(--bg-subtle);
+      color: var(--ink-secondary);
+      border: 1px solid var(--border-hairline);
+      white-space: nowrap;
+    }
+
+    .tree-footer-bar {
+      padding: 9px 16px;
+      background: var(--bg-surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--ink-secondary);
+    }
+
+    /* Right Config Panel */
+    .config-card {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .config-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .config-card-title {
+      margin: 0;
+      font-size: 14.5px;
+      font-weight: 700;
+    }
+
+    .group-preview-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 5px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      font-size: 12px;
+    }
+
+    .avatar-stack {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .avatar-stack span {
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      border: 1.5px solid var(--bg-surface);
+      margin-left: -3px;
+      font-size: 9.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      background: var(--cobalt-primary);
+    }
+
+    .avatar-stack span:first-child {
+      margin-left: 0;
+    }
+
+    .due-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .sla-quick-btns {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .guard-box {
+      padding: 11px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--cobalt-border);
+      background: var(--cobalt-wash);
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .switch-input {
+      appearance: none;
+      width: 34px;
+      height: 19px;
+      border-radius: 999px;
+      background: var(--border-strong);
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: background 0.16s ease;
+    }
+
+    .switch-input::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      transition: transform 0.16s ease;
+    }
+
+    .switch-input:checked {
+      background: var(--cobalt-primary);
+    }
+
+    .switch-input:checked::after {
+      transform: translateX(15px);
+    }
+
+    .guard-title {
+      font-weight: 650;
+      font-size: 12.5px;
+      color: var(--ink-primary);
+      line-height: 1.35;
+    }
+
+    .guard-desc {
+      font-size: 11.5px;
+      color: var(--ink-secondary);
+      line-height: 1.4;
+    }
+
+    .summary-kv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .kv-item {
+      min-width: 0;
+    }
+
+    .kv-label {
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+
+    .kv-val {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .btn-bulk-cta {
+      width: 100%;
+      height: 42px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .batch-progress-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .batch-progress-wrap.visible {
+      display: flex;
+    }
+
+    .progress-track {
+      height: 6px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--cobalt-primary);
+      transition: width 0.24s ease;
+    }
+
+    .batch-receipt-banner {
+      display: none;
+      padding: 11px 12px;
+      border-radius: var(--radius-md);
+      background: var(--verified-bg);
+      border: 1px solid var(--verified-border);
+      color: var(--verified-ink);
+      font-size: 12px;
+    }
+
+    .batch-receipt-banner.visible {
+      display: block;
+    }
+
+    /* VIEW 2: Employee Confluence Page Byline */
+    .byline-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.72fr) minmax(300px, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .confluence-doc-card {
+      padding: 22px 26px;
+    }
+
+    .doc-breadcrumbs {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .doc-h1 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      color: var(--ink-primary);
+    }
+
+    .confluence-byline-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 0 12px;
+      border-bottom: 1px solid var(--border-hairline);
+      flex-wrap: wrap;
+    }
+
+    .byline-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--ink-secondary);
+      flex-wrap: wrap;
+    }
+
+    .byline-interactive-banner {
+      margin: 14px 0 18px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--pending-border);
+      background: var(--pending-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .byline-interactive-banner.is-acknowledged {
+      border-color: var(--verified-border);
+      background: var(--verified-bg);
+    }
+
+    .banner-copy {
+      min-width: 0;
+      flex: 1 1 320px;
+    }
+
+    .banner-headline {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--ink-primary);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .banner-subtext {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--ink-secondary);
+    }
+
+    .doc-section-h2 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 16px 0 6px;
+      color: var(--ink-primary);
+    }
+
+    .doc-p {
+      margin: 0 0 10px;
+      color: var(--ink-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .policy-req-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0 14px;
+      font-size: 12.5px;
+    }
+
+    .policy-req-table th, .policy-req-table td {
+      border: 1px solid var(--border-hairline);
+      padding: 7px 10px;
+      text-align: left;
+    }
+
+    .policy-req-table th {
+      background: var(--bg-subtle);
+      font-weight: 650;
+      color: var(--ink-secondary);
+    }
+
+    /* Right Audit Receipt Inspector */
+    .receipt-inspector-card {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .receipt-field-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 11px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .receipt-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .receipt-key {
+      font-size: 10.5px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+    }
+
+    .receipt-value {
+      font-size: 12px;
+      color: var(--ink-primary);
+      word-break: break-all;
+    }
+
+    .sha-box {
+      padding: 7px 9px;
+      border-radius: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.4;
+      word-break: break-all;
+      color: var(--ink-primary);
+    }
+
+    .revision-sim-box {
+      padding: 11px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--border-strong);
+      background: var(--bg-surface);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* VIEW 3: ISO 27001 / SOC 2 Auditor Matrix */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .kpi-card {
+      padding: 13px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .kpi-label {
+      font-size: 11.5px;
+      font-weight: 650;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .kpi-metric {
+      font-size: 22px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      color: var(--ink-primary);
+    }
+
+    .kpi-metric.metric-verified { color: var(--verified-ink); }
+    .kpi-metric.metric-overdue { color: var(--overdue-ink); }
+
+    .kpi-sub {
+      font-size: 11.5px;
+      color: var(--ink-secondary);
+    }
+
+    .kpi-meter {
+      height: 5px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .kpi-meter-bar {
+      height: 100%;
+      background: var(--verified-ink);
+      transition: width 0.25s ease;
+    }
+
+    .matrix-filter-bar {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pills-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .matrix-inputs-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .matrix-select {
+      width: 215px;
+      height: 31px;
+      font-size: 12px;
+    }
+
+    .matrix-search {
+      width: 210px;
+      height: 31px;
+      font-size: 12px;
+    }
+
+    .table-scroll-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    .audit-table th {
+      text-align: left;
+      padding: 9px 12px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border-hairline);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--ink-secondary);
+      white-space: nowrap;
+    }
+
+    .audit-table td {
+      padding: 8.5px 12px;
+      border-bottom: 1px solid var(--border-hairline);
+      vertical-align: middle;
+    }
+
+    .audit-table tr:hover td {
+      background: var(--bg-subtle);
+    }
+
+    .audit-table tr.live-updated-row td {
+      background: color-mix(in srgb, var(--verified-bg) 45%, var(--bg-surface));
+    }
+
+    .user-cell {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .user-name {
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+
+    .user-acct {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--ink-muted);
+    }
+
+    .hash-pill {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hairline);
+      color: var(--ink-secondary);
+      white-space: nowrap;
+    }
+
+    .matrix-footer {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      flex-wrap: wrap;
+    }
+
+    /* Toast Stack */
+    .toast-region {
+      position: fixed;
+      top: 64px;
+      right: 20px;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      max-width: calc(100vw - 40px);
+      pointer-events: none;
+    }
+
+    .toast-card {
+      pointer-events: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-strong);
+      border-left: 4px solid var(--cobalt-primary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-elevated);
+      padding: 9px 13px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      max-width: 440px;
+    }
+
+    .toast-card.toast-verified {
+      border-left-color: var(--verified-ink);
+    }
+
+    .toast-card.toast-overdue {
+      border-left-color: var(--overdue-ink);
+    }
+
+    .toast-close {
+      border: none;
+      background: transparent;
+      color: var(--ink-muted);
+      cursor: pointer;
+      padding: 0 2px;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    /* Responsive Breakpoints (1024x768 & narrower) */
+    @media (max-width: 1160px) {
+      .confluence-chrome {
+        padding: 0 14px;
+      }
+      .space-crumb-pill {
+        display: none;
+      }
+      .ext-point-tag {
+        display: none;
+      }
+      .workspace-main {
+        padding: 14px 14px 24px;
+      }
+      .bulk-grid {
+        grid-template-columns: minmax(0, 1.32fr) minmax(295px, 1fr);
+        gap: 12px;
+      }
+      .byline-layout {
+        grid-template-columns: minmax(0, 1.45fr) minmax(275px, 1fr);
+        gap: 12px;
+      }
+      .kpi-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .kpi-metric {
+        font-size: 19px;
+      }
+      .audit-table th, .audit-table td {
+        padding: 7px 8px;
+        font-size: 11.5px;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .bulk-grid, .byline-layout {
+        grid-template-columns: 1fr;
+      }
+      .kpi-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .scope-row-top {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Confluence Cloud Chrome -->
+  <header class="confluence-chrome">
+    <div class="chrome-left">
+      <span class="waffle-btn" aria-hidden="true" title="Atlassian App Switcher">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <circle cx="3" cy="3" r="1.4"/><circle cx="8" cy="3" r="1.4"/><circle cx="13" cy="3" r="1.4"/>
+          <circle cx="3" cy="8" r="1.4"/><circle cx="8" cy="8" r="1.4"/><circle cx="13" cy="8" r="1.4"/>
+          <circle cx="3" cy="13" r="1.4"/><circle cx="8" cy="13" r="1.4"/><circle cx="13" cy="13" r="1.4"/>
+        </svg>
+      </span>
+      <span class="confluence-wordmark">Confluence</span>
+      <span class="chrome-divider"></span>
+      <div class="app-identity">
+        <span class="app-logo-badge" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M8 1.5L13.5 3.8V7.8C13.5 11.2 11.1 13.7 8 14.6C4.9 13.7 2.5 11.2 2.5 7.8V3.8L8 1.5Z" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M5.4 8.2L7.2 10L10.8 6.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="app-name">PolicyPulse</span>
+        <span class="forge-trust-pill" title="100% Native Atlassian Forge SQL · Zero External Egress">
+          <span class="dot dot-verified"></span>Runs on Atlassian · Zero Egress
+        </span>
+      </div>
+      <span class="space-crumb-pill">Space: IS · Information Security — ISO 27001</span>
+    </div>
+
+    <div class="chrome-right">
+      <div class="persona-chip" id="active-persona-chip">
+        <span class="avatar-circle" id="persona-initials">MC</span>
+        <span id="persona-label">Maya Chen · CISO Admin</span>
+      </div>
+      <button type="button" class="theme-toggle-btn" id="btn-theme-toggle" aria-pressed="false">
+        <svg id="theme-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M13.2 9.8A5.8 5.8 0 016.2 2.8a5.8 5.8 0 107 7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <span id="theme-label">Dark Mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-View Forge Extension Switcher -->
+  <nav class="workspace-nav-bar" aria-label="PolicyPulse Prototype Views">
+    <div class="workspace-nav-inner">
+      <div class="view-tabs tabs" role="tablist">
+        <button type="button" role="tab" class="view-tab-btn" id="tab-bulk" aria-selected="true" aria-controls="view-bulk" tabindex="0" data-view="bulk">
+          <span class="step-num">1</span>
+          <span>Bulk Policy Pack Assigner</span>
+          <span class="ext-point-tag">spacePage</span>
+        </button>
+        <button type="button" role="tab" class="view-tab-btn" id="tab-byline" aria-selected="false" aria-controls="view-byline" tabindex="-1" data-view="byline">
+          <span class="step-num">2</span>
+          <span>Employee Page Byline</span>
+          <span class="ext-point-tag">contentBylineItem</span>
+        </button>
+        <button type="button" role="tab" class="view-tab-btn" id="tab-matrix" aria-selected="false" aria-controls="view-matrix" tabindex="-1" data-view="matrix">
+          <span class="step-num">3</span>
+          <span>ISO 27001 / SOC 2 Auditor Matrix</span>
+          <span class="ext-point-tag">globalPage</span>
+        </button>
+      </div>
+      <div class="nav-status-summary tabular">
+        <span id="global-batch-indicator" class="status-pill pill-cobalt">
+          <span class="dot dot-cobalt"></span>24 SOPs Staged · @all-employees (68)
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="workspace-main">
+    <!-- =========================================================
+         VIEW 1: 1-Click Bulk Policy Pack Assigner (The Comala Killer)
+         ========================================================= -->
+    <section id="view-bulk" class="view-panel active" role="tabpanel" aria-labelledby="tab-bulk">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">
+            1-Click Bulk Policy Pack Assigner
+            <span class="status-pill pill-cobalt">Zero Per-Page Macro Editing</span>
+          </h1>
+          <p class="view-subtitle">
+            Assign read confirmations across an entire Confluence Space hierarchy or CQL label cohort in one atomic Forge SQL transaction.
+          </p>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="status-pill pill-neutral mono">Forge KVS/SQL · Latency &lt; 180ms</span>
+        </div>
+      </div>
+
+      <div class="bulk-grid">
+        <!-- Left Column: Space / CQL Filter + 24-Page Hierarchical Tree -->
+        <div class="surface-card">
+          <div class="scope-toolbar">
+            <div class="scope-row-top">
+              <div>
+                <label class="field-label" for="space-select">Confluence Space Scope</label>
+                <select id="space-select" class="select-control">
+                  <option value="IS" selected>Information Security — ISO 27001 (Key: IS · 24 SOPs)</option>
+                  <option value="ENG">Engineering Cloud Operations — SOC 2 (Key: ENG · 24 SOPs)</option>
+                  <option value="PEOPLE">Global People &amp; Acceptable Use Policies (Key: HR · 24 SOPs)</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="cql-input">CQL Label / Hierarchy Filter</label>
+                <div class="cql-input-wrap">
+                  <span class="cql-badge">CQL</span>
+                  <input id="cql-input" type="text" class="input-control cql-input" value='label = "iso27001-mandatory" AND space = "IS"' aria-label="CQL Filter Query" />
+                </div>
+              </div>
+            </div>
+
+            <div class="scope-row-bottom">
+              <div class="preset-chips" role="group" aria-label="CQL Quick Filters">
+                <button type="button" class="chip-btn active" data-preset="all">iso27001-mandatory (24)</button>
+                <button type="button" class="chip-btn" data-preset="access">Identity &amp; Access (6)</button>
+                <button type="button" class="chip-btn" data-preset="major">Major v3.0+ Only (10)</button>
+              </div>
+              <div class="tree-controls-right">
+                <input id="tree-search" type="search" class="input-control tree-search-input" placeholder="Filter 24 SOP pages..." aria-label="Filter SOP pages" />
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-select-all">Select All 24</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sop-tree-container" id="sop-tree-root" role="region" aria-label="SOP Hierarchy Tree"></div>
+
+          <div class="tree-footer-bar tabular">
+            <span id="tree-selection-summary"><strong>24</strong> of <strong>24</strong> SOP pages selected across <strong>4</strong> ISO 27001 parent hierarchies</span>
+            <span class="mono" style="font-size:11.5px;">label: iso27001-mandatory</span>
+          </div>
+        </div>
+
+        <!-- Right Column: Target Group, Due Date, Smart Revision Guard & 1-Click CTA -->
+        <aside class="surface-card config-card" aria-label="Assignment Configuration">
+          <div class="config-card-header">
+            <h2 class="config-card-title">Policy Pack Rollout Rules</h2>
+            <span class="status-pill pill-neutral mono" id="pack-mode-badge">DRAFT PACK</span>
+          </div>
+
+          <div>
+            <label class="field-label" for="group-select">Target Confluence Group</label>
+            <select id="group-select" class="select-control">
+              <option value="all-employees" data-count="68" selected>@all-employees (68 active members)</option>
+              <option value="eng-prod-access" data-count="29">@engineering-prod-access (29 active members)</option>
+              <option value="iso-contractors" data-count="14">@contractors-iso-scope (14 active members)</option>
+            </select>
+            <div class="group-preview-strip">
+              <span style="color:var(--ink-secondary);">Synced via Confluence Directory API</span>
+              <span class="avatar-stack" aria-hidden="true">
+                <span>MC</span><span>AR</span><span>DP</span><span>PN</span><span style="background:var(--ink-secondary);">+64</span>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <label class="field-label" for="due-date-input">Attestation Due Date (UTC)</label>
+            <div class="due-row">
+              <input id="due-date-input" type="date" class="input-control mono" value="2026-12-08" />
+              <div class="sla-quick-btns">
+                <button type="button" class="btn btn-secondary btn-sm" data-due="2026-12-01">+7d</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-due="2026-12-08">+14d</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-due="2026-12-24">+30d</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="guard-box">
+            <label class="switch-row" for="toggle-revision-guard">
+              <input id="toggle-revision-guard" type="checkbox" class="switch-input" checked />
+              <div>
+                <div class="guard-title">
+                  Smart Revision Guard: Re-request sign-off on Major versions only (ignore typo fixes)
+                </div>
+                <div class="guard-desc" id="guard-helper-text">
+                  Active via <span class="mono">avi:confluence:updated:page</span>: minor edits (<span class="mono">v3.0 → v3.1</span>) preserve valid employee receipts; major bumps (<span class="mono">v3.0 → v4.0</span>) re-request acknowledgment.
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="summary-kv-grid tabular">
+            <div class="kv-item">
+              <div class="kv-label">Selected SOP Pages</div>
+              <div class="kv-val" id="summary-pages-count">24 pages</div>
+            </div>
+            <div class="kv-item">
+              <div class="kv-label">Target Audience</div>
+              <div class="kv-val" id="summary-users-count">68 members</div>
+            </div>
+            <div class="kv-item">
+              <div class="kv-label">Forge SQL Bindings</div>
+              <div class="kv-val" id="summary-bindings-count">1,632 receipts</div>
+            </div>
+            <div class="kv-item">
+              <div class="kv-label">Per-Page Edits Saved</div>
+              <div class="kv-val" style="color:var(--verified-ink);" id="summary-saved-edits">24 manual saves → 1 click</div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-bulk-cta" id="btn-bulk-assign">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2.5 8.5L6.2 12.2L13.5 4.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span id="btn-bulk-assign-label">Assign 24 Pages in 1 Click</span>
+          </button>
+
+          <div class="batch-progress-wrap" id="batch-progress-wrap" aria-live="polite">
+            <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-secondary);">
+              <span id="batch-progress-text">Committing Forge SQL policy bindings...</span>
+              <span class="mono" id="batch-progress-pct">100%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="batch-progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="batch-receipt-banner" id="batch-receipt-banner" role="status">
+            <div style="font-weight:700;margin-bottom:3px;" id="batch-receipt-title">
+              Batch #PP-20261124-ISO24 Live Across 24 SOP Pages
+            </div>
+            <div id="batch-receipt-detail" style="opacity:0.92;">
+              1,632 read-confirmation bindings active for @all-employees (68) · Due 2026-12-08 · Smart Revision Guard: Major-Only.
+            </div>
+            <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-jump-byline">Preview Employee Byline →</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-batch">Reset Demo</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW 2: Live Employee Confluence Page Byline Experience
+         ========================================================= -->
+    <section id="view-byline" class="view-panel" role="tabpanel" aria-labelledby="tab-byline">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">
+            Employee Confluence Page Byline Experience
+            <span class="status-pill pill-neutral mono">confluence:contentBylineItem</span>
+          </h1>
+          <p class="view-subtitle">
+            Employees acknowledge policies directly from the native Confluence page header — zero external portals or separate logins.
+          </p>
+        </div>
+        <div>
+          <span class="status-pill pill-cobalt">Viewing as Employee: Alex Rivera (Staff Engineer)</span>
+        </div>
+      </div>
+
+      <div class="byline-layout">
+        <!-- Realistic Confluence Cloud SOP Page -->
+        <article class="surface-card confluence-doc-card">
+          <div class="doc-breadcrumbs">
+            <span>Spaces</span><span>/</span>
+            <span>Information Security — ISO 27001</span><span>/</span>
+            <span>02 · Identity &amp; Access Control</span><span>/</span>
+            <span class="mono">POL-007</span>
+          </div>
+
+          <h2 class="doc-h1" id="sop-doc-title">Access Control &amp; MFA Policy v3.0</h2>
+
+          <div class="confluence-byline-strip">
+            <div class="byline-meta-left">
+              <span class="avatar-circle" style="width:20px;height:20px;font-size:9.5px;">MC</span>
+              <span>Owned by <strong>Maya Chen</strong> · Updated Nov 24, 2026 · <strong class="mono" id="byline-version-label">Version 3.0 (Major)</strong></span>
+            </div>
+            <!-- Native Forge contentBylineItem Pill -->
+            <span class="status-pill pill-pending" id="byline-status-pill">
+              <span class="dot dot-pending" id="byline-status-dot"></span>
+              <span id="byline-status-text">PolicyPulse: Pending Acknowledgment · Due Dec 08</span>
+            </span>
+          </div>
+
+          <!-- Interactive Top contentBylineItem Banner -->
+          <div class="byline-interactive-banner" id="byline-banner">
+            <div class="banner-copy">
+              <div class="banner-headline" id="byline-banner-headline">
+                <span>Mandatory ISO 27001 Attestation Required</span>
+                <span class="status-pill pill-neutral mono" style="font-size:10.5px;">Clause 7.3 · Annex A.8.5</span>
+              </div>
+              <div class="banner-subtext" id="byline-banner-subtext">
+                Assigned to <strong>@all-employees</strong> via Batch <span class="mono">#PP-20261124-ISO24</span>. Confirm you have read and applied hardware/passkey MFA requirements in <strong>Access Control &amp; MFA Policy v3.0</strong>.
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+              <button type="button" class="btn btn-primary" id="btn-acknowledge-policy">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3 8.5L6.5 12L13.2 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span id="btn-acknowledge-label">Acknowledge Policy v3.0</span>
+              </button>
+            </div>
+          </div>
+
+          <h3 class="doc-section-h2">1. Purpose &amp; ISO/IEC 27001:2022 Scope</h3>
+          <p class="doc-p">
+            This Standard Operating Procedure governs human and machine authentication across production infrastructure, source control, identity providers, and customer-data enclaves in compliance with <strong>ISO/IEC 27001:2022 Clause 7.3</strong>, <strong>Annex A.5.15</strong>, and <strong>SOC 2 CC6.1 / CC1.4</strong>.
+          </p>
+
+          <h3 class="doc-section-h2">2. Mandatory Authentication &amp; Session Controls (v3.0 Update)</h3>
+          <table class="policy-req-table">
+            <thead>
+              <tr>
+                <th>System Tier</th>
+                <th>Required Factor (v3.0)</th>
+                <th>Max Session / Lease TTL</th>
+                <th>Revocation SLA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Tier 0 · Cloud IAM, Git &amp; K8s Prod</strong></td>
+                <td>FIDO2 / WebAuthn Hardware Passkey (No SMS/TOTP)</td>
+                <td class="mono">4 hours (JIT lease)</td>
+                <td class="mono">&lt;= 15 minutes</td>
+              </tr>
+              <tr>
+                <td><strong>Tier 1 · Atlassian, CRM &amp; Finance</strong></td>
+                <td>SSO + Device-Bound Passkey MFA</td>
+                <td class="mono">12 hours</td>
+                <td class="mono">&lt;= 30 minutes</td>
+              </tr>
+              <tr>
+                <td><strong>Service &amp; CI/CD Principals</strong></td>
+                <td>Short-lived OIDC Workload Tokens (Zero static keys)</td>
+                <td class="mono">60 minutes</td>
+                <td class="mono">Immediate</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 class="doc-section-h2">3. Revision Governance (Smart Revision Guard Log)</h3>
+          <p class="doc-p" style="margin-bottom:0;">
+            <span class="mono">v3.0 (Major · 2026-11-24)</span> deprecated TOTP fallback on Tier 0 production Bastions and triggered fresh employee attestation. Prior <span class="mono">v2.4 (Minor · 2026-10-19)</span> corrected formatting typos without invalidating existing employee receipts.
+          </p>
+        </article>
+
+        <!-- Right Sidebar: Cryptographic Audit Receipt + Revision Guard Tester -->
+        <aside class="surface-card receipt-inspector-card" aria-label="Cryptographic Audit Receipt">
+          <div class="config-card-header">
+            <h3 class="config-card-title">Immutable Forge SQL Receipt</h3>
+            <span class="status-pill pill-pending" id="receipt-badge">Awaiting Sign-Off</span>
+          </div>
+
+          <div class="receipt-field-list">
+            <div class="receipt-row">
+              <span class="receipt-key">Atlassian AccountId</span>
+              <span class="receipt-value mono" id="receipt-account-id">712020:8f4c9a1e-3d92-4b71-9c04-2a8e11d0f9b2</span>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-key">Authenticated Principal</span>
+              <span class="receipt-value" id="receipt-principal">Alex Rivera &lt;alex.rivera@vanta-fin.io&gt;</span>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-key">Confluence Page &amp; Version</span>
+              <span class="receipt-value mono" id="receipt-page-ver">Page 48291044 · POL-007 · v3.0 (Major)</span>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-key">Signed UTC Timestamp</span>
+              <span class="receipt-value mono" id="receipt-utc">— (Click "Acknowledge Policy v3.0")</span>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-key">Audit Receipt Digest (SHA-256)</span>
+              <div class="sha-box" id="receipt-sha256">Pending employee signature on Access Control &amp; MFA Policy v3.0</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-receipt">Copy Receipt JSON</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-jump-matrix">View in ISO 27001 Matrix →</button>
+          </div>
+
+          <div class="revision-sim-box">
+            <div style="font-size:12px;font-weight:700;color:var(--ink-primary);">
+              Test Smart Revision Guard Live
+            </div>
+            <div style="font-size:11.5px;color:var(--ink-secondary);" id="revision-sim-note">
+              Simulate how Confluence page edits affect employee sign-offs when Major-Only Guard is active:
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-sim-minor">Simulate Minor Typo (v3.1)</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-sim-major">Simulate Major Edit (v4.0)</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW 3: ISO 27001 Clause 7.3 / SOC 2 CC1.4 Auditor Matrix
+         ========================================================= -->
+    <section id="view-matrix" class="view-panel" role="tabpanel" aria-labelledby="tab-matrix">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">
+            ISO 27001 Clause 7.3 &amp; SOC 2 CC1.4 Auditor Matrix
+            <span class="status-pill pill-verified"><span class="dot dot-verified"></span>Audit-Ready Evidence</span>
+          </h1>
+          <p class="view-subtitle">
+            Real-time attestation posture across 24 mandatory SOPs with 1-click overdue nudges and immutable auditor CSV export.
+          </p>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="btn btn-overdue" id="btn-nudge-overdue">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 2.2A4.2 4.2 0 003.8 6.4v2.7L2.5 11h11l-1.3-1.9V6.4A4.2 4.2 0 008 2.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M6.5 12.6a1.6 1.6 0 003 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span id="btn-nudge-label">Nudge Overdue (4 users)</span>
+          </button>
+          <button type="button" class="btn btn-primary" id="btn-export-csv">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 2.5v7.8M5 7.6L8 10.6l3-3M3 13.2h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Export ISO 27001 Auditor CSV</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4-Card Live KPI Strip -->
+      <div class="kpi-strip tabular">
+        <div class="surface-card kpi-card">
+          <div class="kpi-label">
+            <span>Overall Attestation Rate</span>
+            <span class="status-pill pill-verified" style="font-size:10.5px;">Clause 7.3</span>
+          </div>
+          <div class="kpi-metric metric-verified" id="kpi-ack-rate">94.1% Acknowledged</div>
+          <div class="kpi-meter"><div class="kpi-meter-bar" id="kpi-ack-bar" style="width:94.1%;"></div></div>
+          <div class="kpi-sub" id="kpi-ack-sub">1,535 / 1,632 SOP bindings · 64 / 68 current</div>
+        </div>
+
+        <div class="surface-card kpi-card">
+          <div class="kpi-label">
+            <span>Overdue Sign-Offs</span>
+            <span class="status-pill pill-overdue" style="font-size:10.5px;">SLA Breach</span>
+          </div>
+          <div class="kpi-metric metric-overdue" id="kpi-overdue-users">4 Users</div>
+          <div class="kpi-sub" id="kpi-overdue-sub">Past 14-day SLA across Tier-0 SOPs · Ready to nudge</div>
+        </div>
+
+        <div class="surface-card kpi-card">
+          <div class="kpi-label">
+            <span>Governed SOP Scope</span>
+            <span class="status-pill pill-neutral mono" style="font-size:10.5px;">SOC 2 CC1.4</span>
+          </div>
+          <div class="kpi-metric" id="kpi-scope-pages">24 SOP Pages</div>
+          <div class="kpi-sub" id="kpi-scope-sub">Smart Revision Guard preserved 192 typo-edit receipts</div>
+        </div>
+
+        <div class="surface-card kpi-card">
+          <div class="kpi-label">
+            <span>Evidence Integrity</span>
+            <span class="status-pill pill-cobalt" style="font-size:10.5px;">Forge SQL</span>
+          </div>
+          <div class="kpi-metric mono" style="font-size:19px;">SHA-256</div>
+          <div class="kpi-sub" id="kpi-export-sub">Zero external egress · Auditor CSV export ready</div>
+        </div>
+      </div>
+
+      <!-- Filterable Auditor Table -->
+      <div class="surface-card">
+        <div class="matrix-filter-bar">
+          <div class="filter-pills-group" role="group" aria-label="Filter by Status">
+            <button type="button" class="chip-btn active" data-status-filter="ALL" id="filter-pill-all">All Sampled Records (12)</button>
+            <button type="button" class="chip-btn" data-status-filter="OVERDUE" id="filter-pill-overdue">Overdue (4)</button>
+            <button type="button" class="chip-btn" data-status-filter="PENDING" id="filter-pill-pending">Pending (1)</button>
+            <button type="button" class="chip-btn" data-status-filter="ACKNOWLEDGED" id="filter-pill-ack">Acknowledged (7)</button>
+          </div>
+
+          <div class="matrix-inputs-group">
+            <select id="matrix-sop-filter" class="select-control matrix-select" aria-label="Filter by SOP Page">
+              <option value="ALL">All 24 ISO 27001 SOPs</option>
+              <option value="POL-007">POL-007 · Access Control &amp; MFA v3.0</option>
+              <option value="POL-001">POL-001 · InfoSec Master Policy v4.0</option>
+              <option value="POL-013">POL-013 · Incident Response Plan v3.0</option>
+              <option value="POL-019">POL-019 · Secure SDLC &amp; Code Review v2.0</option>
+            </select>
+            <select id="matrix-dept-filter" class="select-control matrix-select" aria-label="Filter by Department">
+              <option value="ALL">All Depts (@all-employees)</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Security & IT">Security &amp; IT</option>
+              <option value="Finance & Ops">Finance &amp; Ops</option>
+              <option value="Revenue & CS">Revenue &amp; CS</option>
+            </select>
+            <input id="matrix-search" type="search" class="input-control matrix-search" placeholder="Search user, AccountId, SHA..." aria-label="Search audit records" />
+          </div>
+        </div>
+
+        <div class="table-scroll-wrap">
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th>Employee &amp; AccountId</th>
+                <th>Department</th>
+                <th>SOP Document &amp; Version</th>
+                <th>ISO / SOC 2 Control</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Signed UTC &amp; SHA-256 Evidence</th>
+              </tr>
+            </thead>
+            <tbody id="matrix-tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="matrix-footer tabular">
+          <span id="matrix-showing-label">Showing 12 representative records across @all-employees (68 members · 24 SOPs)</span>
+          <span class="mono">Immutable Export Schema: ISO27001-CL7.3-v2</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Stack -->
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+
+  <script>
+    (function initPolicyPulsePrototype() {
+      "use strict";
+
+      /* Pure-JS Deterministic UTF-8 SHA-256 (RFC 6234) so file:// & airgapped CSP environments work 100% identically */
+      function sha256Hex(rawStr) {
+        let ascii = unescape(encodeURIComponent(String(rawStr)));
+        const rightRotate = function (value, amount) {
+          return (value >>> amount) | (value << (32 - amount));
+        };
+        const mathPow = Math.pow;
+        const maxWord = mathPow(2, 32);
+        let result = "";
+        const words = [];
+        const asciiBitLength = ascii.length * 8;
+        const hash = [];
+        const k = [];
+        let primeCounter = 0;
+        const isComposite = {};
+        for (let candidate = 2; primeCounter < 64; candidate++) {
+          if (!isComposite[candidate]) {
+            for (let i = 0; i < 313; i += candidate) {
+              isComposite[i] = candidate;
+            }
+            hash[primeCounter] = (mathPow(candidate, 0.5) * maxWord) | 0;
+            k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+          }
+        }
+        ascii += "\x80";
+        while ((ascii.length % 64) - 56) ascii += "\x00";
+        for (let i = 0; i < ascii.length; i++) {
+          const j = ascii.charCodeAt(i);
+          words[i >> 2] |= j << (((3 - i) % 4) * 8);
+        }
+        words[words.length] = (asciiBitLength / maxWord) | 0;
+        words[words.length] = asciiBitLength;
+        for (let j = 0; j < words.length; ) {
+          const w = words.slice(j, (j += 16));
+          const oldHash = hash.slice(0);
+          for (let i = 0; i < 64; i++) {
+            const w15 = w[i - 15];
+            const w2 = w[i - 2];
+            const a = hash[0];
+            const e = hash[4];
+            const temp1 =
+              hash[7] +
+              (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
+              ((e & hash[5]) ^ (~e & hash[6])) +
+              k[i] +
+              (w[i] =
+                i < 16
+                  ? w[i]
+                  : (w[i - 16] +
+                      (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) +
+                      w[i - 7] +
+                      (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) |
+                    0);
+            const temp2 =
+              (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +
+              ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+            hash.unshift((temp1 + temp2) | 0);
+            hash[4] = (hash[4] + temp1) | 0;
+            hash.pop();
+          }
+          for (let i = 0; i < 8; i++) {
+            hash[i] = (hash[i] + oldHash[i]) | 0;
+          }
+        }
+        for (let i = 0; i < 8; i++) {
+          for (let j = 3; j + 1; j--) {
+            const b = (hash[i] >> (j * 8)) & 255;
+            result += (b < 16 ? "0" : "") + b.toString(16);
+          }
+        }
+        return result;
+      }
+
+      /* 24 Authentic ISO 27001 SOP Pages in 4 Hierarchical Folders */
+      const SOP_FOLDERS = [
+        {
+          id: "gov",
+          title: "01 · Governance, Context & Risk Management (Clause 5–6)",
+          pages: [
+            { id: "48291001", code: "POL-001", title: "Information Security Master Policy", version: "v4.0", major: true },
+            { id: "48291002", code: "POL-002", title: "Statement of Applicability (SoA) Governance", version: "v3.0", major: true },
+            { id: "48291003", code: "POL-003", title: "Enterprise Risk Assessment & Treatment SOP", version: "v2.3", major: false },
+            { id: "48291004", code: "POL-004", title: "Asset Classification & Data Handling Standard", version: "v3.0", major: true },
+            { id: "48291005", code: "POL-005", title: "Acceptable Use of Corporate Computing Assets", version: "v2.1", major: false },
+            { id: "48291006", code: "POL-006", title: "Information Security Roles & Board Charter", version: "v2.0", major: false }
+          ]
+        },
+        {
+          id: "access",
+          title: "02 · Identity, Access Control & Cryptography (Annex A.5 / A.8)",
+          pages: [
+            { id: "48291044", code: "POL-007", title: "Access Control & MFA Policy", version: "v3.0", major: true },
+            { id: "48291045", code: "POL-008", title: "Privileged Production JIT Access & Bastion SOP", version: "v3.0", major: true },
+            { id: "48291046", code: "POL-009", title: "Cryptographic Key Management & TLS Standard", version: "v2.2", major: false },
+            { id: "48291047", code: "POL-010", title: "Joiner-Mover-Leaver (JML) Access Offboarding", version: "v3.1", major: true },
+            { id: "48291048", code: "POL-011", title: "Secrets, OIDC Tokens & Service Account Policy", version: "v2.0", major: false },
+            { id: "48291049", code: "POL-012", title: "Quarterly User Access Review (UAR) Procedure", version: "v2.4", major: false }
+          ]
+        },
+        {
+          id: "ir",
+          title: "03 · Incident Response, Continuity & Operations (Annex A.5.24–A.7)",
+          pages: [
+            { id: "48291080", code: "POL-013", title: "Security Incident Response & Breach Notification", version: "v3.0", major: true },
+            { id: "48291081", code: "POL-014", title: "Business Continuity & Disaster Recovery (BCDR)", version: "v3.0", major: true },
+            { id: "48291082", code: "POL-015", title: "Endpoint Hardening, MDM & Disk Encryption SOP", version: "v2.5", major: false },
+            { id: "48291083", code: "POL-016", title: "Physical Workspace & Clean Desk Security Policy", version: "v1.4", major: false },
+            { id: "48291084", code: "POL-017", title: "Immutable Backup Verification & Restore Drill SOP", version: "v2.1", major: false },
+            { id: "48291085", code: "POL-018", title: "Centralized Audit Logging & SIEM Retention Policy", version: "v3.0", major: true }
+          ]
+        },
+        {
+          id: "sdlc",
+          title: "04 · Secure SDLC, Cloud & Supplier Governance (Annex A.8)",
+          pages: [
+            { id: "48291110", code: "POL-019", title: "Secure SDLC, Peer Code Review & CI/CD Gates", version: "v2.0", major: false },
+            { id: "48291111", code: "POL-020", title: "Vulnerability Management & Patch SLA Policy", version: "v3.0", major: true },
+            { id: "48291112", code: "POL-021", title: "Third-Party Vendor & Subprocessor Security SOP", version: "v2.2", major: false },
+            { id: "48291113", code: "POL-022", title: "Production Change Management & Rollback Policy", version: "v2.6", major: false },
+            { id: "48291114", code: "POL-023", title: "Customer Data Privacy, GDPR & Retention SOP", version: "v2.3", major: false },
+            { id: "48291115", code: "POL-024", title: "Enterprise AI & LLM Zero-Data-Egress Policy", version: "v1.2", major: false }
+          ]
+        }
+      ];
+
+      const ALL_PAGES = [];
+      SOP_FOLDERS.forEach(function (f) {
+        f.pages.forEach(function (p) {
+          ALL_PAGES.push(Object.assign({ folderId: f.id }, p));
+        });
+      });
+
+      const PP_THEME_KEY = "policypulse_theme_v1";
+
+      const appState = {
+        activeView: "bulk",
+        themeMode: "system",
+        selectedPageIds: new Set(ALL_PAGES.map(function (p) { return p.id; })),
+        collapsedFolders: new Set(),
+        treeSearch: "",
+        preset: "all",
+        groupName: "@all-employees",
+        groupCount: 68,
+        dueDate: "2026-12-08",
+        smartRevisionGuard: true,
+        pol007CohortPreserved: true,
+        batchAssigned: false,
+        batchId: "PP-20261124-ISO24",
+        currentPageVersion: "v3.0",
+        currentPageVersionType: "Major",
+        alexStatus: "PENDING",
+        alexAcknowledged: false,
+        alexSignedVersion: "",
+        alexSignedUtc: "",
+        alexSha256: "",
+        overdueNudgedUtc: "",
+        statusFilter: "ALL",
+        sopFilter: "ALL",
+        deptFilter: "ALL",
+        matrixSearch: ""
+      };
+
+      const AUDIT_RECORDS = [
+        {
+          id: "rec-alex",
+          name: "Alex Rivera",
+          email: "alex.rivera@vanta-fin.io",
+          accountId: "712020:8f4c9a1e-3d92-4b71-9c04-2a8e11d0f9b2",
+          dept: "Engineering",
+          sopCode: "POL-007",
+          sopTitle: "Access Control & MFA Policy",
+          pageId: "48291044",
+          version: "v3.0",
+          currentVersion: "v3.0",
+          signedVersion: "",
+          control: "ISO 27001 Cl. 7.3 · A.8.5",
+          assignedUtc: "2026-11-24T05:00:00Z",
+          dueDate: "2026-12-08",
+          status: "PENDING",
+          signedUtc: "",
+          sha256: "",
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ov-1",
+          name: "Daniel Park",
+          email: "daniel.park@vanta-fin.io",
+          accountId: "712020:31a7b40d-5910-4e28-88c1-90f32e14a7c1",
+          dept: "Engineering",
+          sopCode: "POL-007",
+          sopTitle: "Access Control & MFA Policy",
+          pageId: "48291044",
+          version: "v3.0",
+          currentVersion: "v3.0",
+          signedVersion: "",
+          control: "ISO 27001 Cl. 7.3 · A.8.5",
+          assignedUtc: "2026-11-05T09:00:00Z",
+          dueDate: "2026-11-19",
+          status: "OVERDUE",
+          signedUtc: "",
+          sha256: "",
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ov-2",
+          name: "Priya Nair",
+          email: "priya.nair@vanta-fin.io",
+          accountId: "712020:64c19e02-119b-47a2-b6d4-43c9f8102e55",
+          dept: "Revenue & CS",
+          sopCode: "POL-001",
+          sopTitle: "Information Security Master Policy",
+          pageId: "48291001",
+          version: "v4.0",
+          currentVersion: "v4.0",
+          signedVersion: "",
+          control: "ISO 27001 Cl. 7.3 · A.5.1",
+          assignedUtc: "2026-11-05T09:00:00Z",
+          dueDate: "2026-11-19",
+          status: "OVERDUE",
+          signedUtc: "",
+          sha256: "",
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ov-3",
+          name: "Lucas Weber",
+          email: "lucas.weber@vanta-fin.io",
+          accountId: "712020:92d04b88-7c4e-41f0-9a12-77b54c08d319",
+          dept: "Finance & Ops",
+          sopCode: "POL-013",
+          sopTitle: "Security Incident Response & Breach Notification",
+          pageId: "48291080",
+          version: "v3.0",
+          currentVersion: "v3.0",
+          signedVersion: "",
+          control: "ISO 27001 Cl. 7.3 · A.5.24",
+          assignedUtc: "2026-11-06T09:00:00Z",
+          dueDate: "2026-11-20",
+          status: "OVERDUE",
+          signedUtc: "",
+          sha256: "",
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ov-4",
+          name: "Hannah Okafor",
+          email: "hannah.okafor@vanta-fin.io",
+          accountId: "712020:18e52c79-40b2-4d91-a321-55d89a70b604",
+          dept: "Engineering",
+          sopCode: "POL-019",
+          sopTitle: "Secure SDLC, Peer Code Review & CI/CD Gates",
+          pageId: "48291110",
+          version: "v2.0",
+          currentVersion: "v2.0",
+          signedVersion: "",
+          control: "SOC 2 CC1.4 · ISO A.8.25",
+          assignedUtc: "2026-11-06T09:00:00Z",
+          dueDate: "2026-11-20",
+          status: "OVERDUE",
+          signedUtc: "",
+          sha256: "",
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ack-1",
+          name: "Maya Chen",
+          email: "maya.chen@vanta-fin.io",
+          accountId: "712020:01a94f22-8b31-49d0-94e2-11c83f09a100",
+          dept: "Security & IT",
+          sopCode: "POL-007",
+          sopTitle: "Access Control & MFA Policy",
+          pageId: "48291044",
+          version: "v3.0",
+          currentVersion: "v3.0",
+          signedVersion: "v3.0",
+          control: "ISO 27001 Cl. 7.3 · A.8.5",
+          assignedUtc: "2026-11-18T09:00:00Z",
+          dueDate: "2026-12-08",
+          status: "ACKNOWLEDGED",
+          signedUtc: "2026-11-18T09:14:08Z",
+          sha256: sha256Hex("712020:01a94f22-8b31-49d0-94e2-11c83f09a100|48291044|v3.0|2026-11-18T09:14:08Z"),
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ack-2",
+          name: "Elena Rostova",
+          email: "elena.rostova@vanta-fin.io",
+          accountId: "712020:44b82d11-6a19-4c88-81f0-29d71e50c412",
+          dept: "Engineering",
+          sopCode: "POL-007",
+          sopTitle: "Access Control & MFA Policy",
+          pageId: "48291044",
+          version: "v3.0",
+          currentVersion: "v3.0",
+          signedVersion: "v3.0",
+          control: "ISO 27001 Cl. 7.3 · A.8.5",
+          assignedUtc: "2026-11-18T09:00:00Z",
+          dueDate: "2026-12-08",
+          status: "ACKNOWLEDGED",
+          signedUtc: "2026-11-19T14:22:51Z",
+          sha256: sha256Hex("712020:44b82d11-6a19-4c88-81f0-29d71e50c412|48291044|v3.0|2026-11-19T14:22:51Z"),
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ack-3",
+          name: "Marcus Vance",
+          email: "marcus.vance@vanta-fin.io",
+          accountId: "712020:77c10a93-2f44-4b18-9d02-88e12b44f920",
+          dept: "Security & IT",
+          sopCode: "POL-001",
+          sopTitle: "Information Security Master Policy",
+          pageId: "48291001",
+          version: "v4.0",
+          currentVersion: "v4.0",
+          signedVersion: "v4.0",
+          control: "ISO 27001 Cl. 7.3 · A.5.1",
+          assignedUtc: "2026-11-18T09:00:00Z",
+          dueDate: "2026-12-08",
+          status: "ACKNOWLEDGED",
+          signedUtc: "2026-11-19T16:05:19Z",
+          sha256: sha256Hex("712020:77c10a93-2f44-4b18-9d02-88e12b44f920|48291001|v4.0|2026-11-19T16:05:19Z"),
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ack-4",
+          name: "Sofia Lindqvist",
+          email: "sofia.lindqvist@vanta-fin.io",
+          accountId: "712020:53d91c04-9e20-44a1-8c73-61a04d88e211",
+          dept: "Finance & Ops",
+          sopCode: "POL-013",
+          sopTitle: "Security Incident Response & Breach Notification",
+          pageId: "48291080",
+          version: "v3.0",
+          currentVersion: "v3.0",
+          signedVersion: "v3.0",
+          control: "ISO 27001 Cl. 7.3 · A.5.24",
+          assignedUtc: "2026-11-18T09:00:00Z",
+          dueDate: "2026-12-08",
+          status: "ACKNOWLEDGED",
+          signedUtc: "2026-11-20T08:41:33Z",
+          sha256: sha256Hex("712020:53d91c04-9e20-44a1-8c73-61a04d88e211|48291080|v3.0|2026-11-20T08:41:33Z"),
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ack-5",
+          name: "Kenji Takahashi",
+          email: "kenji.takahashi@vanta-fin.io",
+          accountId: "712020:89f23b17-3c08-4e72-b519-14c92f77a830",
+          dept: "Engineering",
+          sopCode: "POL-019",
+          sopTitle: "Secure SDLC, Peer Code Review & CI/CD Gates",
+          pageId: "48291110",
+          version: "v2.0",
+          currentVersion: "v2.0",
+          signedVersion: "v2.0",
+          control: "SOC 2 CC1.4 · ISO A.8.25",
+          assignedUtc: "2026-11-18T09:00:00Z",
+          dueDate: "2026-12-08",
+          status: "ACKNOWLEDGED",
+          signedUtc: "2026-11-21T11:09:44Z",
+          sha256: sha256Hex("712020:89f23b17-3c08-4e72-b519-14c92f77a830|48291110|v2.0|2026-11-21T11:09:44Z"),
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ack-6",
+          name: "Claire Moreau",
+          email: "claire.moreau@vanta-fin.io",
+          accountId: "712020:22e84a65-7d12-48b9-9f41-39b60c15d744",
+          dept: "Revenue & CS",
+          sopCode: "POL-001",
+          sopTitle: "Information Security Master Policy",
+          pageId: "48291001",
+          version: "v4.0",
+          currentVersion: "v4.0",
+          signedVersion: "v4.0",
+          control: "ISO 27001 Cl. 7.3 · A.5.1",
+          assignedUtc: "2026-11-18T09:00:00Z",
+          dueDate: "2026-12-08",
+          status: "ACKNOWLEDGED",
+          signedUtc: "2026-11-22T15:30:12Z",
+          sha256: sha256Hex("712020:22e84a65-7d12-48b9-9f41-39b60c15d744|48291001|v4.0|2026-11-22T15:30:12Z"),
+          nudgedAt: ""
+        },
+        {
+          id: "rec-ack-7",
+          name: "Devon Brooks",
+          email: "devon.brooks@vanta-fin.io",
+          accountId: "712020:67a19d40-5b83-42c7-a108-92f41e63b509",
+          dept: "Finance & Ops",
+          sopCode: "POL-007",
+          sopTitle: "Access Control & MFA Policy",
+          pageId: "48291044",
+          version: "v3.0",
+          currentVersion: "v3.0",
+          signedVersion: "v3.0",
+          control: "ISO 27001 Cl. 7.3 · A.8.5",
+          assignedUtc: "2026-11-18T09:00:00Z",
+          dueDate: "2026-12-08",
+          status: "ACKNOWLEDGED",
+          signedUtc: "2026-11-23T10:18:05Z",
+          sha256: sha256Hex("712020:67a19d40-5b83-42c7-a108-92f41e63b509|48291044|v3.0|2026-11-23T10:18:05Z"),
+          nudgedAt: ""
+        }
+      ];
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function showToast(title, detail, tone) {
+        const region = document.getElementById("toast-region");
+        const card = document.createElement("div");
+        card.className = "toast-card " + (tone ? "toast-" + tone : "");
+        card.innerHTML =
+          '<div><div style="font-weight:700;margin-bottom:2px;">' +
+          escapeHtml(title) +
+          '</div><div style="color:var(--ink-secondary);font-size:12px;">' +
+          escapeHtml(detail) +
+          "</div></div>" +
+          '<button type="button" class="toast-close" aria-label="Dismiss notification">&times;</button>';
+        card.querySelector(".toast-close").addEventListener("click", function () {
+          card.remove();
+        });
+        region.appendChild(card);
+        while (region.children.length > 3) {
+          region.firstElementChild.remove();
+        }
+      }
+
+      /* View Navigation + Keyboard Roving Tabindex */
+      function switchView(viewId, opts) {
+        appState.activeView = viewId;
+        document.querySelectorAll(".view-tab-btn").forEach(function (btn) {
+          const active = btn.getAttribute("data-view") === viewId;
+          btn.setAttribute("aria-selected", active ? "true" : "false");
+          btn.setAttribute("tabindex", active ? "0" : "-1");
+          if (opts && opts.focus && active) {
+            btn.focus();
+          }
+        });
+        document.querySelectorAll(".view-panel").forEach(function (panel) {
+          panel.classList.toggle("active", panel.id === "view-" + viewId);
+        });
+
+        const initials = document.getElementById("persona-initials");
+        const label = document.getElementById("persona-label");
+        if (viewId === "byline") {
+          initials.textContent = "AR";
+          label.textContent = "Alex Rivera · Staff Engineer";
+        } else {
+          initials.textContent = "MC";
+          label.textContent = "Maya Chen · CISO Admin";
+        }
+        window.__qaTelemetry.interactions.push("switchView:" + viewId);
+      }
+
+      document.querySelectorAll(".view-tab-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          switchView(btn.getAttribute("data-view"));
+        });
+        btn.addEventListener("keydown", function (ev) {
+          const key = String(ev.key || "");
+          if (key !== "ArrowRight" && key !== "ArrowLeft" && key !== "Home" && key !== "End") return;
+          ev.preventDefault();
+          const tabs = Array.from(document.querySelectorAll(".view-tab-btn"));
+          const idx = tabs.indexOf(btn);
+          if (idx < 0 || !tabs.length) return;
+          let nextIdx = idx;
+          if (key === "ArrowRight") nextIdx = (idx + 1) % tabs.length;
+          else if (key === "ArrowLeft") nextIdx = (idx - 1 + tabs.length) % tabs.length;
+          else if (key === "Home") nextIdx = 0;
+          else if (key === "End") nextIdx = tabs.length - 1;
+          switchView(tabs[nextIdx].getAttribute("data-view"), { focus: true });
+        });
+      });
+
+      /* Theme Lifecycle (OS prefers-color-scheme default + localStorage persistence) */
+      function readLocalTheme() {
+        try {
+          const val = window.localStorage && window.localStorage.getItem(PP_THEME_KEY);
+          if (val === "dark" || val === "light" || val === "system") return val;
+        } catch (_) {}
+        return null;
+      }
+
+      function writeLocalTheme(val) {
+        try {
+          if (window.localStorage) window.localStorage.setItem(PP_THEME_KEY, val);
+        } catch (_) {}
+      }
+
+      function systemPrefersDark() {
+        try {
+          return Boolean(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        } catch (_) {
+          return false;
+        }
+      }
+
+      function applyTheme(mode) {
+        const normalized = mode === "dark" || mode === "light" || mode === "system" ? mode : "system";
+        appState.themeMode = normalized;
+        const effectiveDark = normalized === "dark" || (normalized === "system" && systemPrefersDark());
+        const html = document.documentElement;
+        if (normalized === "system") {
+          html.removeAttribute("data-theme");
+        } else {
+          html.setAttribute("data-theme", normalized);
+        }
+        const btn = document.getElementById("btn-theme-toggle");
+        btn.setAttribute("aria-pressed", effectiveDark ? "true" : "false");
+        document.getElementById("theme-label").textContent = effectiveDark ? "Daylight Mode" : "Dark Mode";
+      }
+
+      applyTheme(readLocalTheme() || "system");
+
+      try {
+        const mq = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+        if (mq && typeof mq.addEventListener === "function") {
+          mq.addEventListener("change", function () {
+            if (appState.themeMode === "system") applyTheme("system");
+          });
+        }
+      } catch (_) {}
+
+      document.getElementById("btn-theme-toggle").addEventListener("click", function (ev) {
+        let next;
+        if (ev && ev.shiftKey) {
+          next = "system";
+        } else {
+          const effectiveDark =
+            appState.themeMode === "dark" || (appState.themeMode === "system" && systemPrefersDark());
+          next = effectiveDark ? "light" : "dark";
+        }
+        applyTheme(next);
+        writeLocalTheme(next);
+        window.__qaTelemetry.interactions.push("theme:" + next);
+      });
+
+      /* Render View 1 Tree & Config Summary */
+      function getFilteredPagesForFolder(folder) {
+        const q = appState.treeSearch.trim().toLowerCase();
+        return folder.pages.filter(function (p) {
+          if (appState.preset === "access" && folder.id !== "access") return false;
+          if (appState.preset === "major" && !p.major) return false;
+          if (!q) return true;
+          return (
+            p.code.toLowerCase().indexOf(q) !== -1 ||
+            p.title.toLowerCase().indexOf(q) !== -1 ||
+            p.version.toLowerCase().indexOf(q) !== -1
+          );
+        });
+      }
+
+      function renderSopTree() {
+        const root = document.getElementById("sop-tree-root");
+        const activeEl = document.activeElement;
+        const preservedFocusId =
+          activeEl && root.contains(activeEl) && activeEl.id ? activeEl.id : null;
+        const preservedScrollTop = root.scrollTop;
+        let html = "";
+        let visibleCount = 0;
+
+        SOP_FOLDERS.forEach(function (folder) {
+          const pages = getFilteredPagesForFolder(folder);
+          if (pages.length === 0) return;
+          visibleCount += pages.length;
+          const isCollapsed = appState.collapsedFolders.has(folder.id);
+          const selectedInFolder = pages.filter(function (p) {
+            return appState.selectedPageIds.has(p.id);
+          }).length;
+          const allFolderChecked = selectedInFolder === pages.length;
+
+          html +=
+            '<div class="tree-folder-block">' +
+            '<div class="tree-folder-header">' +
+            '<div class="folder-left">' +
+            '<button type="button" id="sop-folder-toggle-' +
+            folder.id +
+            '" class="folder-toggle-btn" data-folder-toggle="' +
+            folder.id +
+            '" aria-label="Toggle folder">' +
+            (isCollapsed ? "&#9656;" : "&#9662;") +
+            "</button>" +
+            '<input type="checkbox" id="sop-folder-check-' +
+            folder.id +
+            '" data-folder-check="' +
+            folder.id +
+            '" ' +
+            (allFolderChecked ? "checked" : "") +
+            ' aria-label="Select folder ' +
+            escapeHtml(folder.title) +
+            '" />' +
+            "<span>" +
+            escapeHtml(folder.title) +
+            "</span>" +
+            "</div>" +
+            '<span class="status-pill pill-neutral tabular" style="font-size:11px;">' +
+            selectedInFolder +
+            "/" +
+            pages.length +
+            " selected</span>" +
+            "</div>";
+
+          if (!isCollapsed) {
+            pages.forEach(function (p) {
+              const checked = appState.selectedPageIds.has(p.id);
+              const assigned = appState.batchAssigned && checked;
+              html +=
+                '<div class="sop-page-row ' +
+                (checked ? "is-selected" : "") +
+                '">' +
+                '<input type="checkbox" id="sop-page-check-' +
+                p.id +
+                '" data-page-check="' +
+                p.id +
+                '" ' +
+                (checked ? "checked" : "") +
+                ' aria-label="Select ' +
+                escapeHtml(p.code + " " + p.title) +
+                '" />' +
+                '<div class="sop-title-cell">' +
+                '<span class="sop-code">' +
+                escapeHtml(p.code) +
+                "</span>" +
+                '<span class="sop-title-text">' +
+                escapeHtml(p.title) +
+                "</span>" +
+                "</div>" +
+                '<span class="version-tag">' +
+                escapeHtml(p.version) +
+                (p.major ? " · Major" : "") +
+                "</span>" +
+                (assigned
+                  ? '<span class="status-pill pill-verified"><span class="dot dot-verified"></span>Assigned · ' +
+                    appState.groupCount +
+                    "u</span>"
+                  : checked
+                  ? '<span class="status-pill pill-cobalt">Staged</span>'
+                  : '<span class="status-pill pill-neutral">Excluded</span>') +
+                "</div>";
+            });
+          }
+          html += "</div>";
+        });
+
+        if (!html) {
+          html =
+            '<div style="padding:26px;text-align:center;color:var(--ink-muted);">No SOP pages match your current filter.</div>';
+        }
+        root.innerHTML = html;
+        root.scrollTop = preservedScrollTop;
+        if (preservedFocusId) {
+          const restoredFocusEl = document.getElementById(preservedFocusId);
+          if (restoredFocusEl && typeof restoredFocusEl.focus === "function") {
+            try {
+              restoredFocusEl.focus({ preventScroll: true });
+            } catch (_) {
+              restoredFocusEl.focus();
+            }
+          }
+        }
+
+        const selCount = appState.selectedPageIds.size;
+        const bindings = selCount * appState.groupCount;
+        document.getElementById("tree-selection-summary").innerHTML =
+          "<strong>" +
+          selCount +
+          "</strong> of <strong>24</strong> SOP pages selected (" +
+          visibleCount +
+          " shown)";
+        document.getElementById("summary-pages-count").textContent = selCount + " pages";
+        document.getElementById("summary-users-count").textContent = appState.groupCount + " members";
+        document.getElementById("summary-bindings-count").textContent =
+          bindings.toLocaleString("en-US") + " receipts";
+        document.getElementById("summary-saved-edits").textContent =
+          selCount + " manual saves → 1 click";
+
+        const btnAssign = document.getElementById("btn-bulk-assign");
+        const btnLabel = document.getElementById("btn-bulk-assign-label");
+        btnAssign.disabled = selCount === 0;
+        if (appState.batchAssigned) {
+          btnLabel.textContent = selCount + " Pages Assigned · Batch #" + appState.batchId;
+        } else {
+          btnLabel.textContent = "Assign " + selCount + " Pages in 1 Click";
+        }
+        if (typeof renderAuditorMatrix === "function") {
+          renderAuditorMatrix();
+        }
+      }
+
+      document.getElementById("sop-tree-root").addEventListener("click", function (ev) {
+        const toggleBtn = ev.target.closest("[data-folder-toggle]");
+        if (toggleBtn) {
+          const fid = toggleBtn.getAttribute("data-folder-toggle");
+          if (appState.collapsedFolders.has(fid)) {
+            appState.collapsedFolders.delete(fid);
+          } else {
+            appState.collapsedFolders.add(fid);
+          }
+          renderSopTree();
+          return;
+        }
+      });
+
+      document.getElementById("sop-tree-root").addEventListener("change", function (ev) {
+        const pageChk = ev.target.closest("[data-page-check]");
+        if (pageChk) {
+          const pid = pageChk.getAttribute("data-page-check");
+          if (pageChk.checked) appState.selectedPageIds.add(pid);
+          else appState.selectedPageIds.delete(pid);
+          appState.batchAssigned = false;
+          renderSopTree();
+          return;
+        }
+        const folderChk = ev.target.closest("[data-folder-check]");
+        if (folderChk) {
+          const fid = folderChk.getAttribute("data-folder-check");
+          const folder = SOP_FOLDERS.find(function (f) { return f.id === fid; });
+          if (folder) {
+            getFilteredPagesForFolder(folder).forEach(function (p) {
+              if (folderChk.checked) appState.selectedPageIds.add(p.id);
+              else appState.selectedPageIds.delete(p.id);
+            });
+            appState.batchAssigned = false;
+            renderSopTree();
+          }
+        }
+      });
+
+      document.getElementById("tree-search").addEventListener("input", function (ev) {
+        appState.treeSearch = ev.target.value;
+        renderSopTree();
+      });
+
+      document.querySelectorAll("[data-preset]").forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          const preset = chip.getAttribute("data-preset");
+          appState.preset = preset;
+          document.querySelectorAll("[data-preset]").forEach(function (c) {
+            c.classList.toggle("active", c === chip);
+          });
+          const cqlInput = document.getElementById("cql-input");
+          if (preset === "all") {
+            cqlInput.value = 'label = "iso27001-mandatory" AND space = "IS"';
+            ALL_PAGES.forEach(function (p) { appState.selectedPageIds.add(p.id); });
+          } else if (preset === "access") {
+            cqlInput.value = 'label = "iso27001-mandatory" AND ancestor = 48291040';
+            appState.selectedPageIds.clear();
+            SOP_FOLDERS[1].pages.forEach(function (p) { appState.selectedPageIds.add(p.id); });
+          } else if (preset === "major") {
+            cqlInput.value = 'label = "iso27001-mandatory" AND property[policypulse].major = true';
+            appState.selectedPageIds.clear();
+            ALL_PAGES.filter(function (p) { return p.major; }).forEach(function (p) {
+              appState.selectedPageIds.add(p.id);
+            });
+          }
+          appState.batchAssigned = false;
+          renderSopTree();
+        });
+      });
+
+      document.getElementById("btn-select-all").addEventListener("click", function () {
+        if (appState.selectedPageIds.size === ALL_PAGES.length) {
+          appState.selectedPageIds.clear();
+          document.getElementById("btn-select-all").textContent = "Select All 24";
+        } else {
+          ALL_PAGES.forEach(function (p) { appState.selectedPageIds.add(p.id); });
+          document.getElementById("btn-select-all").textContent = "Clear All";
+        }
+        appState.batchAssigned = false;
+        renderSopTree();
+      });
+
+      document.getElementById("space-select").addEventListener("change", function (ev) {
+        const key = ev.target.value;
+        document.getElementById("cql-input").value =
+          'label = "iso27001-mandatory" AND space = "' + key + '"';
+        appState.batchAssigned = false;
+        renderSopTree();
+      });
+
+      document.getElementById("group-select").addEventListener("change", function (ev) {
+        const opt = ev.target.selectedOptions[0];
+        appState.groupName = "@" + ev.target.value;
+        appState.groupCount = parseInt(opt.getAttribute("data-count"), 10) || 68;
+        appState.batchAssigned = false;
+        renderSopTree();
+      });
+
+      document.querySelectorAll("[data-due]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          const d = btn.getAttribute("data-due");
+          appState.dueDate = d;
+          document.getElementById("due-date-input").value = d;
+        });
+      });
+
+      document.getElementById("due-date-input").addEventListener("change", function (ev) {
+        appState.dueDate = ev.target.value || "2026-12-08";
+      });
+
+      function parseVersionParts(ver) {
+        const m = String(ver || "").match(/^v(\d+)\.(\d+)$/);
+        return m
+          ? { major: parseInt(m[1], 10), minor: parseInt(m[2], 10) }
+          : { major: 3, minor: 0 };
+      }
+
+      function nextMinorVersion(ver) {
+        const p = parseVersionParts(ver);
+        return "v" + p.major + "." + (p.minor + 1);
+      }
+
+      function nextMajorVersion(ver) {
+        const p = parseVersionParts(ver);
+        return "v" + (p.major + 1) + ".0";
+      }
+
+      function syncPol007PageMetadata(nextVer, isMajor) {
+        SOP_FOLDERS.forEach(function (f) {
+          f.pages.forEach(function (p) {
+            if (p.id === "48291044") {
+              p.version = nextVer;
+              p.major = Boolean(isMajor);
+            }
+          });
+        });
+        ALL_PAGES.forEach(function (p) {
+          if (p.id === "48291044") {
+            p.version = nextVer;
+            p.major = Boolean(isMajor);
+          }
+        });
+        const sopFilter = document.getElementById("matrix-sop-filter");
+        if (sopFilter && sopFilter.children) {
+          Array.from(sopFilter.children).forEach(function (opt) {
+            if (opt && opt.value === "POL-007") {
+              opt.textContent = "POL-007 · Access Control & MFA " + nextVer;
+            }
+          });
+        }
+      }
+
+      function syncAlexStateFromRecord() {
+        const alexRow = AUDIT_RECORDS[0];
+        appState.alexStatus = alexRow.status;
+        appState.alexAcknowledged = alexRow.status === "ACKNOWLEDGED";
+        appState.alexSignedVersion = alexRow.signedVersion || "";
+        appState.alexSignedUtc = alexRow.signedUtc || "";
+        appState.alexSha256 = alexRow.sha256 || "";
+      }
+
+      function applyPol007RevisionPolicy(nextVer, isMajor) {
+        const nextParts = parseVersionParts(nextVer);
+        let anyInvalidated = false;
+
+        AUDIT_RECORDS.forEach(function (r) {
+          if (r.pageId !== "48291044") return;
+          r.currentVersion = nextVer;
+          r.version = nextVer;
+
+          if (isMajor) {
+            if (r.status === "ACKNOWLEDGED" || r.status === "PENDING" || r.status === "PENDING_REACK") {
+              r.status = "PENDING_REACK";
+              r.signedVersion = "";
+              r.signedUtc = "";
+              r.sha256 = "";
+              anyInvalidated = true;
+            }
+            return;
+          }
+
+          if (appState.smartRevisionGuard) {
+            if (r.status === "ACKNOWLEDGED" && r.signedVersion) {
+              const signedParts = parseVersionParts(r.signedVersion);
+              if (signedParts.major !== nextParts.major) {
+                r.status = "PENDING_REACK";
+                r.signedVersion = "";
+                r.signedUtc = "";
+                r.sha256 = "";
+                anyInvalidated = true;
+              }
+            }
+          } else {
+            if ((r.status === "ACKNOWLEDGED" && r.signedVersion !== nextVer) || r.status === "PENDING") {
+              r.status = "PENDING_REACK";
+              r.signedVersion = "";
+              r.signedUtc = "";
+              r.sha256 = "";
+              anyInvalidated = true;
+            }
+          }
+        });
+
+        if (isMajor || anyInvalidated) {
+          appState.pol007CohortPreserved = false;
+        }
+        syncAlexStateFromRecord();
+      }
+
+      document.getElementById("toggle-revision-guard").addEventListener("change", function (ev) {
+        appState.smartRevisionGuard = ev.target.checked;
+        if (!appState.smartRevisionGuard) {
+          const hadMinorDrift = AUDIT_RECORDS.some(function (r) {
+            return r.pageId === "48291044" && r.status === "ACKNOWLEDGED" && r.signedVersion !== appState.currentPageVersion;
+          });
+          if (hadMinorDrift) {
+            const priorSigned =
+              appState.alexSignedVersion ||
+              (AUDIT_RECORDS.find(function (r) { return r.pageId === "48291044" && r.signedVersion; }) || {}).signedVersion ||
+              "v3.0";
+            applyPol007RevisionPolicy(appState.currentPageVersion, false);
+            document.getElementById("revision-sim-note").textContent =
+              priorSigned +
+              " → " +
+              appState.currentPageVersion +
+              ": Revision Guard switched OFF, invalidating prior POL-007 receipts to PENDING_REACK across all assigned members.";
+            renderBylineState();
+            renderAuditorMatrix();
+          }
+        }
+        document.getElementById("guard-helper-text").textContent = appState.smartRevisionGuard
+          ? "Active via avi:confluence:updated:page: minor edits (" +
+            appState.currentPageVersion +
+            " → " +
+            nextMinorVersion(appState.currentPageVersion) +
+            ") preserve valid employee receipts; major bumps (" +
+            appState.currentPageVersion +
+            " → " +
+            nextMajorVersion(appState.currentPageVersion) +
+            ") re-request acknowledgment."
+          : "Strict Every-Edit Mode: any minor edit (including typo fixes) will re-request sign-off across all assigned members.";
+      });
+
+      /* 1-Click Bulk Assign Action */
+      document.getElementById("btn-bulk-assign").addEventListener("click", function () {
+        const count = appState.selectedPageIds.size;
+        if (count === 0) return;
+        const bindings = count * appState.groupCount;
+        const progressWrap = document.getElementById("batch-progress-wrap");
+        const progressFill = document.getElementById("batch-progress-fill");
+        const banner = document.getElementById("batch-receipt-banner");
+        const badge = document.getElementById("pack-mode-badge");
+
+        progressWrap.classList.add("visible");
+        progressFill.style.width = "45%";
+        requestAnimationFrame(function () {
+          progressFill.style.width = "100%";
+        });
+
+        appState.batchAssigned = true;
+        badge.className = "status-pill pill-verified mono";
+        badge.textContent = "ACTIVE · #" + appState.batchId;
+
+        document.getElementById("batch-receipt-title").textContent =
+          "Batch #" + appState.batchId + " Assigned Across " + count + " SOP Pages";
+        document.getElementById("batch-receipt-detail").textContent =
+          bindings.toLocaleString("en-US") +
+          " Forge SQL read-confirmation bindings active for " +
+          appState.groupName +
+          " (" +
+          appState.groupCount +
+          " members) · Due " +
+          appState.dueDate +
+          " · Smart Revision Guard: " +
+          (appState.smartRevisionGuard ? "Major-Only" : "Every-Edit") +
+          ".";
+        banner.classList.add("visible");
+
+        const globalPill = document.getElementById("global-batch-indicator");
+        globalPill.className = "status-pill pill-verified";
+        globalPill.innerHTML =
+          '<span class="dot dot-verified"></span>Batch #' +
+          appState.batchId +
+          " Live · " +
+          count +
+          " SOPs × " +
+          appState.groupCount +
+          "u";
+
+        renderSopTree();
+        showToast(
+          "Assigned " + count + " SOP Pages in 1 Click",
+          bindings.toLocaleString("en-US") +
+            " read-confirmation records committed to Forge SQL for " +
+            appState.groupName +
+            ".",
+          "verified"
+        );
+        window.__qaTelemetry.interactions.push("bulkAssign:" + count);
+      });
+
+      document.getElementById("btn-reset-batch").addEventListener("click", function () {
+        appState.batchAssigned = false;
+        document.getElementById("batch-progress-wrap").classList.remove("visible");
+        document.getElementById("batch-receipt-banner").classList.remove("visible");
+        const badge = document.getElementById("pack-mode-badge");
+        badge.className = "status-pill pill-neutral mono";
+        badge.textContent = "DRAFT PACK";
+        renderSopTree();
+      });
+
+      document.getElementById("btn-jump-byline").addEventListener("click", function () {
+        switchView("byline");
+      });
+
+      document.getElementById("btn-jump-matrix").addEventListener("click", function () {
+        switchView("matrix");
+      });
+
+      /* VIEW 2: Employee Byline Sign-Off & Smart Revision Simulator */
+      function buildReceiptPayload() {
+        const accountId = "712020:8f4c9a1e-3d92-4b71-9c04-2a8e11d0f9b2";
+        const pageId = "48291044";
+        const signedVersion =
+          appState.alexAcknowledged && appState.alexSignedVersion ? appState.alexSignedVersion : null;
+        const signedUtc =
+          appState.alexAcknowledged && appState.alexSignedUtc ? appState.alexSignedUtc : null;
+        const sha256 =
+          appState.alexAcknowledged && appState.alexSha256 ? appState.alexSha256 : null;
+        const canonicalPayload =
+          signedVersion && signedUtc
+            ? accountId + "|" + pageId + "|" + signedVersion + "|" + signedUtc
+            : null;
+        const hashMatchesPayload = Boolean(
+          canonicalPayload && sha256 && sha256Hex(canonicalPayload) === sha256
+        );
+        return {
+          schema: "policypulse.forge.receipt.v1",
+          batchId: appState.batchId,
+          accountId: accountId,
+          principal: "alex.rivera@vanta-fin.io",
+          pageId: pageId,
+          sopCode: "POL-007",
+          currentVersion: appState.currentPageVersion,
+          signedVersion: signedVersion,
+          smartRevisionGuard: appState.smartRevisionGuard ? "MAJOR_ONLY" : "EVERY_EDIT",
+          status: appState.alexStatus,
+          signedUtc: signedUtc,
+          sha256: sha256,
+          hashMatchesPayload: hashMatchesPayload
+        };
+      }
+
+      async function copyTextWithFallback(text) {
+        let copied = false;
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+          try {
+            await navigator.clipboard.writeText(text);
+            copied = true;
+          } catch (_) {
+            copied = false;
+          }
+        }
+        if (!copied && document && typeof document.execCommand === "function") {
+          const prevFocus = document.activeElement;
+          let ta = null;
+          try {
+            ta = document.createElement("textarea");
+            ta.value = String(text == null ? "" : text);
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            ta.style.left = "-9999px";
+            ta.style.top = "0";
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            copied = Boolean(document.execCommand("copy"));
+          } catch (_) {
+            copied = false;
+          } finally {
+            if (ta && ta.parentNode) {
+              ta.parentNode.removeChild(ta);
+            }
+            if (prevFocus && typeof prevFocus.focus === "function") {
+              try {
+                prevFocus.focus({ preventScroll: true });
+              } catch (_) {
+                prevFocus.focus();
+              }
+            }
+          }
+        }
+        return copied;
+      }
+
+      function renderBylineState() {
+        const pill = document.getElementById("byline-status-pill");
+        const banner = document.getElementById("byline-banner");
+        const headline = document.getElementById("byline-banner-headline");
+        const subtext = document.getElementById("byline-banner-subtext");
+        const btnAck = document.getElementById("btn-acknowledge-policy");
+        const btnAckLabel = document.getElementById("btn-acknowledge-label");
+        const receiptBadge = document.getElementById("receipt-badge");
+        const curVer = appState.currentPageVersion;
+        const curType = appState.currentPageVersionType;
+
+        document.getElementById("sop-doc-title").textContent =
+          "Access Control & MFA Policy " + curVer;
+        document.getElementById("byline-version-label").textContent =
+          "Version " + curVer.slice(1) + " (" + curType + ")";
+        const btnSimMinor = document.getElementById("btn-sim-minor");
+        if (btnSimMinor) btnSimMinor.textContent = "Simulate Minor Typo (" + nextMinorVersion(curVer) + ")";
+        const btnSimMajor = document.getElementById("btn-sim-major");
+        if (btnSimMajor) btnSimMajor.textContent = "Simulate Major Edit (" + nextMajorVersion(curVer) + ")";
+
+        if (appState.alexAcknowledged) {
+          const signedVer = appState.alexSignedVersion || curVer;
+          const preservedMinor = signedVer !== curVer;
+          document.getElementById("receipt-page-ver").textContent = preservedMinor
+            ? "Page 48291044 · POL-007 · Signed " + signedVer + " · Current " + curVer + " (Guard)"
+            : "Page 48291044 · POL-007 · " + signedVer + " (" + curType + ")";
+
+          pill.className = "status-pill pill-verified";
+          pill.innerHTML =
+            '<span class="dot dot-verified"></span><span>PolicyPulse: Acknowledged ' +
+            escapeHtml(signedVer) +
+            (preservedMinor ? " · Valid on " + escapeHtml(curVer) : " · Verified") +
+            "</span>";
+
+          banner.classList.add("is-acknowledged");
+          headline.innerHTML =
+            "<span>Policy " +
+            escapeHtml(signedVer) +
+            (preservedMinor
+              ? " Acknowledged (Preserved on " + escapeHtml(curVer) + ")"
+              : " Acknowledged &amp; Integrity Digest Bound") +
+            "</span>" +
+            '<span class="status-pill pill-verified mono" style="font-size:10.5px;">SHA-256: ' +
+            appState.alexSha256.slice(0, 12) +
+            "…</span>";
+          subtext.innerHTML =
+            "Signed by <strong>Alex Rivera</strong> (<span class=\"mono\">712020:8f4c9a1e…d0f9b2</span>) on <span class=\"mono\">" +
+            escapeHtml(signedVer) +
+            "</span> at <span class=\"mono\">" +
+            escapeHtml(appState.alexSignedUtc) +
+            "</span>. Stored immutably in Atlassian Forge SQL.";
+
+          btnAck.className = "btn btn-secondary";
+          btnAck.disabled = true;
+          btnAck.setAttribute("aria-disabled", "true");
+          btnAckLabel.textContent = "Acknowledged " + signedVer;
+
+          receiptBadge.className = "status-pill pill-verified";
+          receiptBadge.textContent = "VERIFIED · FORGE SQL";
+          document.getElementById("receipt-utc").textContent = appState.alexSignedUtc;
+          document.getElementById("receipt-sha256").textContent = appState.alexSha256;
+        } else {
+          const isReack = appState.alexStatus === "PENDING_REACK";
+          document.getElementById("receipt-page-ver").textContent =
+            "Page 48291044 · POL-007 · " + curVer + " (" + curType + ")";
+
+          pill.className = "status-pill pill-pending";
+          pill.innerHTML =
+            '<span class="dot dot-pending"></span><span>PolicyPulse: ' +
+            (isReack
+              ? "Re-Acknowledgment Required (" + escapeHtml(curVer) + ")"
+              : "Pending Acknowledgment") +
+            " · Due " +
+            escapeHtml(appState.dueDate) +
+            "</span>";
+
+          banner.classList.remove("is-acknowledged");
+          headline.innerHTML =
+            "<span>Mandatory ISO 27001 Attestation Required (" +
+            escapeHtml(curVer) +
+            ")</span>" +
+            '<span class="status-pill pill-neutral mono" style="font-size:10.5px;">Clause 7.3 · Annex A.8.5</span>';
+          subtext.innerHTML =
+            "Assigned to <strong>" +
+            escapeHtml(appState.groupName) +
+            "</strong> via Batch <span class=\"mono\">#" +
+            escapeHtml(appState.batchId) +
+            "</span>. Confirm you have read and applied hardware/passkey MFA requirements in <strong>Access Control &amp; MFA Policy " +
+            escapeHtml(curVer) +
+            "</strong>.";
+
+          btnAck.className = "btn btn-primary";
+          btnAck.disabled = false;
+          btnAck.removeAttribute("aria-disabled");
+          btnAckLabel.textContent = "Acknowledge Policy " + curVer;
+
+          receiptBadge.className = "status-pill pill-pending";
+          receiptBadge.textContent = isReack ? "Pending Re-Ack" : "Awaiting Sign-Off";
+          document.getElementById("receipt-utc").textContent =
+            "— (Click \"Acknowledge Policy " + curVer + "\")";
+          document.getElementById("receipt-sha256").textContent =
+            "Pending employee signature on Access Control & MFA Policy " + curVer;
+        }
+      }
+
+      document.getElementById("btn-acknowledge-policy").addEventListener("click", function () {
+        if (appState.alexAcknowledged) {
+          return;
+        }
+        const signedVer = appState.currentPageVersion;
+        const nowUtc = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+        const acct = "712020:8f4c9a1e-3d92-4b71-9c04-2a8e11d0f9b2";
+        const canonicalPayload = acct + "|48291044|" + signedVer + "|" + nowUtc;
+        const digest = sha256Hex(canonicalPayload);
+
+        const alexRow = AUDIT_RECORDS[0];
+        alexRow.status = "ACKNOWLEDGED";
+        alexRow.currentVersion = appState.currentPageVersion;
+        alexRow.version = appState.currentPageVersion;
+        alexRow.signedVersion = signedVer;
+        alexRow.signedUtc = nowUtc;
+        alexRow.sha256 = digest;
+        syncAlexStateFromRecord();
+
+        renderBylineState();
+        renderAuditorMatrix();
+        showToast(
+          "Acknowledged Access Control & MFA Policy " + signedVer,
+          "Recorded SHA-256 audit receipt " + digest.slice(0, 16) + "… at " + nowUtc,
+          "verified"
+        );
+        window.__qaTelemetry.interactions.push("acknowledge:" + signedVer);
+      });
+
+      document.getElementById("btn-copy-receipt").addEventListener("click", async function () {
+        const receiptObj = buildReceiptPayload();
+        window.__lastCopiedReceipt = receiptObj;
+        const jsonText = JSON.stringify(receiptObj, null, 2);
+        const copied = await copyTextWithFallback(jsonText);
+        if (copied) {
+          showToast(
+            "Copied Audit Receipt JSON",
+            "Immutable Forge SQL receipt payload copied to clipboard.",
+            "verified"
+          );
+          window.__qaTelemetry.interactions.push("copyReceipt:ok");
+        } else {
+          showToast(
+            "Clipboard Copy Blocked",
+            "Unable to access system clipboard automatically. Copy the SHA-256 digest from the receipt panel manually.",
+            "overdue"
+          );
+          window.__qaTelemetry.interactions.push("copyReceipt:error");
+        }
+      });
+
+      document.getElementById("btn-sim-minor").addEventListener("click", function () {
+        const prevVer = appState.currentPageVersion;
+        const priorSignedRef = appState.alexSignedVersion || prevVer;
+        const nextVer = nextMinorVersion(prevVer);
+        appState.currentPageVersion = nextVer;
+        appState.currentPageVersionType = "Minor Typo Fix";
+        syncPol007PageMetadata(nextVer, false);
+        applyPol007RevisionPolicy(nextVer, false);
+        document.getElementById("revision-sim-note").textContent = appState.smartRevisionGuard
+          ? priorSignedRef +
+            " → " +
+            nextVer +
+            " (Minor Typo Fix): Smart Revision Guard preserved signedVersion " +
+            (appState.alexSignedVersion || priorSignedRef) +
+            " receipts across POL-007 without re-nagging " +
+            appState.groupName +
+            "!"
+          : priorSignedRef +
+            " → " +
+            nextVer +
+            ": Revision Guard was OFF, so POL-007 status invalidated to PENDING_REACK and prior signature fields were cleared.";
+        renderSopTree();
+        renderBylineState();
+        renderAuditorMatrix();
+        window.__qaTelemetry.interactions.push("simMinor:" + nextVer);
+      });
+
+      document.getElementById("btn-sim-major").addEventListener("click", function () {
+        const prevVer = appState.currentPageVersion;
+        const priorSignedRef = appState.alexSignedVersion || prevVer;
+        const nextVer = nextMajorVersion(prevVer);
+        appState.currentPageVersion = nextVer;
+        appState.currentPageVersionType = "Major";
+        syncPol007PageMetadata(nextVer, true);
+        applyPol007RevisionPolicy(nextVer, true);
+        document.getElementById("revision-sim-note").textContent =
+          priorSignedRef +
+          " → " +
+          nextVer +
+          " (Major Policy Change): Smart Revision Guard invalidated prior POL-007 receipts (PENDING_REACK) and requested fresh " +
+          nextVer +
+          " sign-off.";
+        renderSopTree();
+        renderBylineState();
+        renderAuditorMatrix();
+        window.__qaTelemetry.interactions.push("simMajor:" + nextVer);
+      });
+
+      /* VIEW 3: ISO 27001 / SOC 2 Auditor Matrix */
+      function renderAuditorMatrix() {
+        const pendingCount = AUDIT_RECORDS.filter(function (r) {
+          return r.status === "PENDING" || r.status === "PENDING_REACK";
+        }).length;
+        const ackSampleCount = AUDIT_RECORDS.filter(function (r) { return r.status === "ACKNOWLEDGED"; }).length;
+        const overdueCount = AUDIT_RECORDS.filter(function (r) { return r.status === "OVERDUE"; }).length;
+
+        const scopedPages = appState.selectedPageIds.size;
+        const groupCount = appState.groupCount;
+        const totalBindings = scopedPages * groupCount;
+        const hasPol007 = appState.selectedPageIds.has("48291044");
+        const otherPages = Math.max(0, scopedPages - (hasPol007 ? 1 : 0));
+        const sampledPol007Ack = AUDIT_RECORDS.filter(function (r) {
+          return r.pageId === "48291044" && r.status === "ACKNOWLEDGED";
+        }).length;
+        const unsampledPol007Ack = appState.pol007CohortPreserved
+          ? Math.max(0, groupCount - 8)
+          : 0;
+        const pol007Ack = hasPol007
+          ? Math.min(groupCount, sampledPol007Ack + unsampledPol007Ack)
+          : 0;
+        const otherAck = otherPages * Math.max(0, groupCount - 4);
+        const ackBindings = Math.min(totalBindings, otherAck + pol007Ack);
+        const pct = totalBindings > 0 ? ((ackBindings / totalBindings) * 100).toFixed(1) : "0.0";
+        const effectiveOverdue = scopedPages > 0 ? overdueCount : 0;
+        const pendingBindings = Math.max(0, totalBindings - ackBindings - effectiveOverdue);
+        const currentUsers =
+          totalBindings === 0
+            ? 0
+            : hasPol007 && !appState.pol007CohortPreserved
+            ? Math.min(groupCount, sampledPol007Ack)
+            : Math.min(
+                groupCount,
+                Math.max(0, groupCount - effectiveOverdue - (hasPol007 && !appState.alexAcknowledged ? 1 : 0))
+              );
+
+        document.getElementById("kpi-ack-rate").textContent = pct + "% Acknowledged";
+        document.getElementById("kpi-ack-bar").style.width = pct + "%";
+        document.getElementById("kpi-ack-sub").textContent =
+          ackBindings.toLocaleString("en-US") +
+          " / " +
+          totalBindings.toLocaleString("en-US") +
+          " SOP bindings · " +
+          pendingBindings.toLocaleString("en-US") +
+          " pending · " +
+          currentUsers +
+          " / " +
+          groupCount +
+          " current";
+
+        const overdueUsersEl = document.getElementById("kpi-overdue-users");
+        if (overdueUsersEl) {
+          overdueUsersEl.textContent = effectiveOverdue + " Users";
+        }
+        if (!appState.overdueNudgedUtc) {
+          document.getElementById("kpi-overdue-sub").textContent =
+            effectiveOverdue +
+            " overdue · " +
+            pendingCount +
+            " sampled pending (" +
+            pendingBindings.toLocaleString("en-US") +
+            " bindings awaiting sign-off)";
+        }
+        const scopePagesEl = document.getElementById("kpi-scope-pages");
+        if (scopePagesEl) {
+          scopePagesEl.textContent = scopedPages + " SOP Pages";
+        }
+
+        document.getElementById("filter-pill-all").textContent =
+          "All Sampled Records (" + AUDIT_RECORDS.length + ")";
+        document.getElementById("filter-pill-overdue").textContent =
+          "Overdue (" + overdueCount + ")";
+        document.getElementById("filter-pill-pending").textContent =
+          "Pending (" + pendingCount + ")";
+        document.getElementById("filter-pill-ack").textContent =
+          "Acknowledged (" + ackSampleCount + ")";
+
+        const q = appState.matrixSearch.trim().toLowerCase();
+        const filtered = AUDIT_RECORDS.filter(function (r) {
+          if (appState.statusFilter !== "ALL") {
+            if (appState.statusFilter === "PENDING") {
+              if (r.status !== "PENDING" && r.status !== "PENDING_REACK") return false;
+            } else if (r.status !== appState.statusFilter) {
+              return false;
+            }
+          }
+          if (appState.sopFilter !== "ALL" && r.sopCode !== appState.sopFilter) return false;
+          if (appState.deptFilter !== "ALL" && r.dept !== appState.deptFilter) return false;
+          if (!q) return true;
+          return (
+            r.name.toLowerCase().indexOf(q) !== -1 ||
+            r.email.toLowerCase().indexOf(q) !== -1 ||
+            r.accountId.toLowerCase().indexOf(q) !== -1 ||
+            r.sopCode.toLowerCase().indexOf(q) !== -1 ||
+            r.sopTitle.toLowerCase().indexOf(q) !== -1 ||
+            r.sha256.toLowerCase().indexOf(q) !== -1
+          );
+        });
+
+        const tbody = document.getElementById("matrix-tbody");
+        let rowsHtml = "";
+        filtered.forEach(function (r) {
+          let statusHtml = "";
+          if (r.status === "ACKNOWLEDGED") {
+            statusHtml =
+              '<span class="status-pill pill-verified"><span class="dot dot-verified"></span>Acknowledged</span>';
+          } else if (r.status === "OVERDUE") {
+            statusHtml =
+              '<span class="status-pill pill-overdue"><span class="dot dot-overdue"></span>Overdue · 4d</span>' +
+              (r.nudgedAt
+                ? ' <span class="status-pill pill-neutral mono" style="font-size:10px;">Nudged</span>'
+                : "");
+          } else if (r.status === "PENDING_REACK") {
+            statusHtml =
+              '<span class="status-pill pill-pending"><span class="dot dot-pending"></span>Pending Re-Ack</span>';
+          } else {
+            statusHtml =
+              '<span class="status-pill pill-pending"><span class="dot dot-pending"></span>Pending</span>';
+          }
+
+          const curRowVer = r.currentVersion || r.version;
+          const verLabel =
+            r.signedVersion && r.signedVersion !== curRowVer
+              ? curRowVer + " · signed " + r.signedVersion
+              : curRowVer;
+
+          const evidenceHtml = r.sha256
+            ? '<div class="mono" style="font-size:11px;color:var(--ink-secondary);">' +
+              escapeHtml(r.signedUtc) +
+              '</div><span class="hash-pill" title="' +
+              escapeHtml(r.sha256) +
+              '">sha256:' +
+              escapeHtml(r.sha256.slice(0, 14)) +
+              "…</span>"
+            : r.nudgedAt
+            ? '<span class="mono" style="font-size:11px;color:var(--overdue-ink);">Reminder sent ' +
+              escapeHtml(r.nudgedAt) +
+              "</span>"
+            : '<span style="color:var(--ink-muted);font-size:11.5px;">Awaiting signature</span>';
+
+          const isLiveRow = r.id === "rec-alex" && appState.alexAcknowledged;
+          rowsHtml +=
+            '<tr class="' +
+            (isLiveRow ? "live-updated-row" : "") +
+            '">' +
+            '<td><div class="user-cell"><span class="user-name">' +
+            escapeHtml(r.name) +
+            (isLiveRow
+              ? ' <span class="status-pill pill-cobalt" style="font-size:10px;padding:1px 5px;">LIVE</span>'
+              : "") +
+            '</span><span class="user-acct">' +
+            escapeHtml(r.accountId.slice(0, 23)) +
+            "…</span></div></td>" +
+            "<td>" +
+            escapeHtml(r.dept) +
+            "</td>" +
+            '<td><span class="sop-code">' +
+            escapeHtml(r.sopCode) +
+            "</span> " +
+            escapeHtml(r.sopTitle) +
+            ' <span class="version-tag">' +
+            escapeHtml(verLabel) +
+            "</span></td>" +
+            '<td><span class="mono" style="font-size:11px;color:var(--ink-secondary);">' +
+            escapeHtml(r.control) +
+            "</span></td>" +
+            '<td class="mono" style="font-size:11.5px;">' +
+            escapeHtml(r.dueDate) +
+            "</td>" +
+            "<td>" +
+            statusHtml +
+            "</td>" +
+            "<td>" +
+            evidenceHtml +
+            "</td>" +
+            "</tr>";
+        });
+
+        if (!rowsHtml) {
+          rowsHtml =
+            '<tr><td colspan="7" style="text-align:center;padding:22px;color:var(--ink-muted);">No audit records match the selected filters.</td></tr>';
+        }
+        tbody.innerHTML = rowsHtml;
+        document.getElementById("matrix-showing-label").textContent =
+          "Showing " +
+          filtered.length +
+          " of " +
+          AUDIT_RECORDS.length +
+          " sampled audit records (@all-employees · 68 members · 24 SOPs)";
+      }
+
+      document.querySelectorAll("[data-status-filter]").forEach(function (pill) {
+        pill.addEventListener("click", function () {
+          appState.statusFilter = pill.getAttribute("data-status-filter");
+          document.querySelectorAll("[data-status-filter]").forEach(function (p) {
+            p.classList.toggle("active", p === pill);
+          });
+          renderAuditorMatrix();
+        });
+      });
+
+      document.getElementById("matrix-sop-filter").addEventListener("change", function (ev) {
+        appState.sopFilter = ev.target.value;
+        renderAuditorMatrix();
+      });
+
+      document.getElementById("matrix-dept-filter").addEventListener("change", function (ev) {
+        appState.deptFilter = ev.target.value;
+        renderAuditorMatrix();
+      });
+
+      document.getElementById("matrix-search").addEventListener("input", function (ev) {
+        appState.matrixSearch = ev.target.value;
+        renderAuditorMatrix();
+      });
+
+      /* 1-Click Nudge Overdue (4 users) */
+      document.getElementById("btn-nudge-overdue").addEventListener("click", function () {
+        const nowTime = new Date().toISOString().slice(11, 19) + " UTC";
+        const overdueUsers = [];
+        AUDIT_RECORDS.forEach(function (r) {
+          if (r.status === "OVERDUE") {
+            r.nudgedAt = nowTime;
+            overdueUsers.push(r.name);
+          }
+        });
+        appState.overdueNudgedUtc = nowTime;
+        document.getElementById("kpi-overdue-sub").textContent =
+          "4 overdue users nudged at " + nowTime + " · Logged to audit trail";
+        document.getElementById("btn-nudge-label").textContent =
+          "Nudged 4 Overdue Users ✓";
+        renderAuditorMatrix();
+        showToast(
+          "Nudged 4 Overdue Users via Confluence & Email",
+          "Dispatched SLA escalation reminders to " + overdueUsers.join(", ") + " (" + nowTime + ").",
+          "overdue"
+        );
+        window.__qaTelemetry.interactions.push("nudgeOverdue:" + overdueUsers.length);
+      });
+
+      /* Working Export ISO 27001 Auditor CSV Download */
+      function csvCell(val) {
+        const s = String(val == null ? "" : val);
+        if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf("\n") !== -1) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }
+
+      document.getElementById("btn-export-csv").addEventListener("click", function () {
+        const headers = [
+          "Audit_Control",
+          "Space_Key",
+          "Batch_ID",
+          "Page_ID",
+          "SOP_Code",
+          "SOP_Title",
+          "Current_Page_Version",
+          "Signed_Version",
+          "Smart_Revision_Guard",
+          "Employee_Name",
+          "Employee_Email",
+          "Atlassian_Account_ID",
+          "Department",
+          "Assigned_UTC",
+          "Due_Date",
+          "Status",
+          "Acknowledged_UTC",
+          "Receipt_SHA256"
+        ];
+        const lines = [headers.join(",")];
+        AUDIT_RECORDS.forEach(function (r) {
+          lines.push(
+            [
+              r.control,
+              "IS",
+              appState.batchId,
+              r.pageId,
+              r.sopCode,
+              r.sopTitle,
+              r.currentVersion || r.version,
+              r.signedVersion || (r.sha256 ? r.version : ""),
+              appState.smartRevisionGuard ? "MAJOR_ONLY" : "EVERY_EDIT",
+              r.name,
+              r.email,
+              r.accountId,
+              r.dept,
+              r.assignedUtc,
+              r.dueDate,
+              r.status,
+              r.signedUtc || "",
+              r.sha256 || ""
+            ]
+              .map(csvCell)
+              .join(",")
+          );
+        });
+        const csvContent = lines.join("\r\n") + "\r\n";
+        const filename = "PolicyPulse_ISO27001_Clause7.3_Evidence_2026-11-24.csv";
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function () {
+          URL.revokeObjectURL(blobUrl);
+        }, 1500);
+
+        const exportManifestHash = sha256Hex(csvContent);
+        window.__qaTelemetry.downloads.push({
+          filename: filename,
+          rowCount: AUDIT_RECORDS.length,
+          byteLength: csvContent.length,
+          sha256: exportManifestHash,
+          headerCols: headers.length
+        });
+        document.getElementById("kpi-export-sub").textContent =
+          "Exported " + filename + " (" + AUDIT_RECORDS.length + " rows)";
+        showToast(
+          "Exported ISO 27001 Auditor CSV",
+          filename + " downloaded (" + AUDIT_RECORDS.length + " records · manifest sha256:" + exportManifestHash.slice(0, 12) + "…).",
+          "verified"
+        );
+        window.__qaTelemetry.interactions.push("exportCsv:" + AUDIT_RECORDS.length);
+      });
+
+      window.__policyPulseApi = {
+        buildReceiptPayload: buildReceiptPayload,
+        sha256Hex: sha256Hex,
+        getState: function () {
+          return Object.assign({}, appState, {
+            alexRecord: Object.assign({}, AUDIT_RECORDS[0]),
+            auditRecords: AUDIT_RECORDS.map(function (r) {
+              return Object.assign({}, r);
+            })
+          });
+        }
+      };
+
+      /* Initial Render */
+      renderSopTree();
+      renderBylineState();
+      renderAuditorMatrix();
+    })();
+  </script>
+</body>
+</html>
