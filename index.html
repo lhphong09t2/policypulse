@@ -167,6 +167,34 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* Prominent Client-Side Simulation Banner (N-12) */
+    .sim-banner {
+      background: var(--pending-bg);
+      color: var(--pending-ink);
+      border-bottom: 1px solid var(--pending-border);
+      padding: 7px 20px;
+      font-size: 12px;
+      font-weight: 650;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sim-banner-badge {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: var(--bg-surface);
+      border: 1px solid var(--pending-border);
+      color: var(--pending-ink);
+      letter-spacing: 0.02em;
+    }
+
     /* Confluence Top Chrome */
     .confluence-chrome {
       background: var(--bg-surface);
@@ -1495,6 +1523,12 @@
   </style>
 </head>
 <body>
+  <!-- Mandatory Client-Side Simulation Disclosure Banner -->
+  <div class="sim-banner" id="simulation-notice-banner" role="note" aria-label="Simulation Notice">
+    <span class="sim-banner-badge">SIMULATION</span>
+    <span>Interactive Client-Side Simulation — Sample Data Only (Atlassian Forge SQL Backend in Development)</span>
+  </div>
+
   <!-- Top Confluence Cloud Chrome -->
   <header class="confluence-chrome">
     <div class="chrome-left">
@@ -1515,11 +1549,11 @@
           </svg>
         </span>
         <span class="app-name">PolicyPulse</span>
-        <span class="forge-trust-pill" title="100% Native Atlassian Forge SQL · Zero External Egress">
-          <span class="dot dot-verified"></span>Runs on Atlassian · Zero Egress
+        <span class="forge-trust-pill" title="Interactive Client-Side Simulation — Target Architecture: Native Atlassian Forge SQL · Zero External Egress">
+          <span class="dot dot-verified"></span>Simulation Preview · Forge Zero-Egress Target
         </span>
       </div>
-      <span class="space-crumb-pill">Space: IS · Information Security — ISO 27001</span>
+      <span class="space-crumb-pill" id="space-crumb-pill">Space: IS · Information Security — ISO 27001</span>
     </div>
 
     <div class="chrome-right">
@@ -1576,11 +1610,11 @@
             <span class="status-pill pill-cobalt">Zero Per-Page Macro Editing</span>
           </h1>
           <p class="view-subtitle">
-            Assign read confirmations across an entire Confluence Space hierarchy or CQL label cohort in one atomic Forge SQL transaction.
+            Simulate assigning read confirmations across a Confluence Space hierarchy or CQL label cohort (client-side preview; Atlassian Forge SQL backend in development).
           </p>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
-          <span class="status-pill pill-neutral mono">Forge KVS/SQL · Latency &lt; 180ms</span>
+          <span class="status-pill pill-neutral mono">Client-Side Simulation · Sample Data</span>
         </div>
       </div>
 
@@ -1594,7 +1628,7 @@
                 <select id="space-select" class="select-control">
                   <option value="IS" selected>Information Security — ISO 27001 (Key: IS · 24 SOPs)</option>
                   <option value="ENG">Engineering Cloud Operations — SOC 2 (Key: ENG · 24 SOPs)</option>
-                  <option value="PEOPLE">Global People &amp; Acceptable Use Policies (Key: HR · 24 SOPs)</option>
+                  <option value="HR">Global People &amp; Acceptable Use Policies (Key: HR · 24 SOPs)</option>
                 </select>
               </div>
               <div>
@@ -1614,7 +1648,7 @@
               </div>
               <div class="tree-controls-right">
                 <input id="tree-search" type="search" class="input-control tree-search-input" placeholder="Filter 24 SOP pages..." aria-label="Filter SOP pages" />
-                <button type="button" class="btn btn-secondary btn-sm" id="btn-select-all">Select All 24</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-select-all">Clear All</button>
               </div>
             </div>
           </div>
@@ -1654,9 +1688,9 @@
             <div class="due-row">
               <input id="due-date-input" type="date" class="input-control mono" value="2026-12-08" />
               <div class="sla-quick-btns">
-                <button type="button" class="btn btn-secondary btn-sm" data-due="2026-12-01">+7d</button>
-                <button type="button" class="btn btn-secondary btn-sm" data-due="2026-12-08">+14d</button>
-                <button type="button" class="btn btn-secondary btn-sm" data-due="2026-12-24">+30d</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-due-days="7" data-due="2026-12-01">+7d</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-due-days="14" data-due="2026-12-08">+14d</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-due-days="30" data-due="2026-12-24">+30d</button>
               </div>
             </div>
           </div>
@@ -1685,7 +1719,7 @@
               <div class="kv-val" id="summary-users-count">68 members</div>
             </div>
             <div class="kv-item">
-              <div class="kv-label">Forge SQL Bindings</div>
+              <div class="kv-label">Simulated Bindings</div>
               <div class="kv-val" id="summary-bindings-count">1,632 receipts</div>
             </div>
             <div class="kv-item">
@@ -1703,7 +1737,7 @@
 
           <div class="batch-progress-wrap" id="batch-progress-wrap" aria-live="polite">
             <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-secondary);">
-              <span id="batch-progress-text">Committing Forge SQL policy bindings...</span>
+              <span id="batch-progress-text">Simulating policy pack bindings in browser memory...</span>
               <span class="mono" id="batch-progress-pct">100%</span>
             </div>
             <div class="progress-track">
@@ -1713,10 +1747,10 @@
 
           <div class="batch-receipt-banner" id="batch-receipt-banner" role="status">
             <div style="font-weight:700;margin-bottom:3px;" id="batch-receipt-title">
-              Batch #PP-20261124-ISO24 Live Across 24 SOP Pages
+              Simulated Batch #PP-20261124-ISO24 Staged Across 24 SOP Pages
             </div>
             <div id="batch-receipt-detail" style="opacity:0.92;">
-              1,632 read-confirmation bindings active for @all-employees (68) · Due 2026-12-08 · Smart Revision Guard: Major-Only.
+              1,632 simulated read-confirmation bindings staged for @all-employees (68) · Due 2026-12-08 · Smart Revision Guard: Major-Only (sample data only).
             </div>
             <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
               <button type="button" class="btn btn-secondary btn-sm" id="btn-jump-byline">Preview Employee Byline →</button>
@@ -1835,9 +1869,9 @@
         </article>
 
         <!-- Right Sidebar: Cryptographic Audit Receipt + Revision Guard Tester -->
-        <aside class="surface-card receipt-inspector-card" aria-label="Cryptographic Audit Receipt">
+        <aside class="surface-card receipt-inspector-card" aria-label="Simulated SHA-256 Receipt Preview">
           <div class="config-card-header">
-            <h3 class="config-card-title">Immutable Forge SQL Receipt</h3>
+            <h3 class="config-card-title">Simulated SHA-256 Receipt Preview</h3>
             <span class="status-pill pill-pending" id="receipt-badge">Awaiting Sign-Off</span>
           </div>
 
@@ -1893,10 +1927,10 @@
         <div>
           <h1 class="view-title">
             ISO 27001 Clause 7.3 &amp; SOC 2 CC1.4 Auditor Matrix
-            <span class="status-pill pill-verified"><span class="dot dot-verified"></span>Audit-Ready Evidence</span>
+            <span class="status-pill pill-pending"><span class="dot dot-pending"></span>Simulated Evidence Preview</span>
           </h1>
           <p class="view-subtitle">
-            Real-time attestation posture across 24 mandatory SOPs with 1-click overdue nudges and immutable auditor CSV export.
+            Interactive client-side attestation posture preview across 24 sample SOPs with simulated overdue nudges and formula-guarded CSV export.
           </p>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -1905,13 +1939,13 @@
               <path d="M8 2.2A4.2 4.2 0 003.8 6.4v2.7L2.5 11h11l-1.3-1.9V6.4A4.2 4.2 0 008 2.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
               <path d="M6.5 12.6a1.6 1.6 0 003 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
-            <span id="btn-nudge-label">Nudge Overdue (4 users)</span>
+            <span id="btn-nudge-label">Simulate Nudge (4 users)</span>
           </button>
           <button type="button" class="btn btn-primary" id="btn-export-csv">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M8 2.5v7.8M5 7.6L8 10.6l3-3M3 13.2h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span>Export ISO 27001 Auditor CSV</span>
+            <span id="btn-export-csv-label">Export Sample Auditor CSV (12)</span>
           </button>
         </div>
       </div>
@@ -1949,10 +1983,10 @@
         <div class="surface-card kpi-card">
           <div class="kpi-label">
             <span>Evidence Integrity</span>
-            <span class="status-pill pill-cobalt" style="font-size:10.5px;">Forge SQL</span>
+            <span class="status-pill pill-cobalt" style="font-size:10.5px;">Simulation</span>
           </div>
           <div class="kpi-metric mono" style="font-size:19px;">SHA-256</div>
-          <div class="kpi-sub" id="kpi-export-sub">Zero external egress · Auditor CSV export ready</div>
+          <div class="kpi-sub" id="kpi-export-sub">Client-side simulation · Sample CSV export ready</div>
         </div>
       </div>
 
@@ -2017,9 +2051,41 @@
     (function initPolicyPulsePrototype() {
       "use strict";
 
-      /* Pure-JS Deterministic UTF-8 SHA-256 (RFC 6234) so file:// & airgapped CSP environments work 100% identically */
+      /* Pure-JS Deterministic UTF-8 SHA-256 (RFC 6234) using TextEncoder + UTF-8 byte fallback */
+      function utf8ToBytes(rawStr) {
+        const str = String(rawStr == null ? "" : rawStr);
+        if (typeof TextEncoder === "function") {
+          return Array.from(new TextEncoder().encode(str));
+        }
+        const bytes = [];
+        for (let i = 0; i < str.length; i++) {
+          let code = str.charCodeAt(i);
+          if (code < 0x80) {
+            bytes.push(code);
+          } else if (code < 0x800) {
+            bytes.push(0xc0 | (code >> 6), 0x80 | (code & 0x3f));
+          } else if (code >= 0xd800 && code <= 0xdbff && i + 1 < str.length) {
+            const next = str.charCodeAt(++i);
+            const cp = 0x10000 + (((code & 0x3ff) << 10) | (next & 0x3ff));
+            bytes.push(
+              0xf0 | (cp >> 18),
+              0x80 | ((cp >> 12) & 0x3f),
+              0x80 | ((cp >> 6) & 0x3f),
+              0x80 | (cp & 0x3f)
+            );
+          } else {
+            bytes.push(
+              0xe0 | (code >> 12),
+              0x80 | ((code >> 6) & 0x3f),
+              0x80 | (code & 0x3f)
+            );
+          }
+        }
+        return bytes;
+      }
+
       function sha256Hex(rawStr) {
-        let ascii = unescape(encodeURIComponent(String(rawStr)));
+        const bytes = utf8ToBytes(rawStr);
         const rightRotate = function (value, amount) {
           return (value >>> amount) | (value << (32 - amount));
         };
@@ -2027,7 +2093,7 @@
         const maxWord = mathPow(2, 32);
         let result = "";
         const words = [];
-        const asciiBitLength = ascii.length * 8;
+        const bitLength = bytes.length * 8;
         const hash = [];
         const k = [];
         let primeCounter = 0;
@@ -2041,14 +2107,13 @@
             k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
           }
         }
-        ascii += "\x80";
-        while ((ascii.length % 64) - 56) ascii += "\x00";
-        for (let i = 0; i < ascii.length; i++) {
-          const j = ascii.charCodeAt(i);
-          words[i >> 2] |= j << (((3 - i) % 4) * 8);
+        bytes.push(0x80);
+        while ((bytes.length % 64) !== 56) bytes.push(0x00);
+        for (let i = 0; i < bytes.length; i++) {
+          words[i >> 2] |= bytes[i] << (((3 - i) % 4) * 8);
         }
-        words[words.length] = (asciiBitLength / maxWord) | 0;
-        words[words.length] = asciiBitLength;
+        words[words.length] = (bitLength / maxWord) | 0;
+        words[words.length] = bitLength;
         for (let j = 0; j < words.length; ) {
           const w = words.slice(j, (j += 16));
           const oldHash = hash.slice(0);
@@ -2150,17 +2215,45 @@
       });
 
       const PP_THEME_KEY = "policypulse_theme_v1";
+      const SIMULATION_NOTICE_VALUE = "CLIENT_SIDE_SIMULATION_SAMPLE_DATA";
+      const SPACE_META = {
+        IS: "Information Security — ISO 27001",
+        ENG: "Engineering Cloud Operations — SOC 2",
+        HR: "Global People & Acceptable Use Policies"
+      };
+
+      function computeUtcDateOffset(days, baseDate) {
+        const base = baseDate instanceof Date ? baseDate : new Date();
+        return new Date(base.getTime() + Number(days || 0) * 86400000).toISOString().slice(0, 10);
+      }
+
+      function getTodayUtcDateStr(nowDate) {
+        return computeUtcDateOffset(0, nowDate);
+      }
+
+      function getOverdueDaysUtc(dueDateStr, nowMs) {
+        const clean = String(dueDateStr || "").trim();
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(clean)) return 0;
+        const deadlineMs = Date.parse(clean + "T23:59:59Z");
+        const refMs = typeof nowMs === "number" && Number.isFinite(nowMs) ? nowMs : Date.now();
+        if (!Number.isFinite(deadlineMs) || refMs <= deadlineMs) return 0;
+        return Math.max(1, Math.ceil((refMs - deadlineMs) / 86400000));
+      }
+
+      const DEFAULT_DUE_DATE = computeUtcDateOffset(14);
 
       const appState = {
         activeView: "bulk",
         themeMode: "system",
+        spaceKey: "IS",
+        spaceLabel: SPACE_META.IS,
         selectedPageIds: new Set(ALL_PAGES.map(function (p) { return p.id; })),
         collapsedFolders: new Set(),
         treeSearch: "",
         preset: "all",
         groupName: "@all-employees",
         groupCount: 68,
-        dueDate: "2026-12-08",
+        dueDate: DEFAULT_DUE_DATE,
         smartRevisionGuard: true,
         pol007CohortPreserved: true,
         batchAssigned: false,
@@ -2179,7 +2272,7 @@
         matrixSearch: ""
       };
 
-      const AUDIT_RECORDS = [
+      const INITIAL_AUDIT_RECORDS = [
         {
           id: "rec-alex",
           name: "Alex Rivera",
@@ -2194,11 +2287,14 @@
           signedVersion: "",
           control: "ISO 27001 Cl. 7.3 · A.8.5",
           assignedUtc: "2026-11-24T05:00:00Z",
-          dueDate: "2026-12-08",
+          dueDate: DEFAULT_DUE_DATE,
           status: "PENDING",
+          wasReack: false,
+          batchEditable: true,
           signedUtc: "",
           sha256: "",
-          nudgedAt: ""
+          nudgedAt: "",
+          priorReceipts: []
         },
         {
           id: "rec-ov-1",
@@ -2422,12 +2518,111 @@
         }
       ];
 
+      function cloneRecord(rec) {
+        return Object.assign({}, rec, {
+          priorReceipts: Array.isArray(rec.priorReceipts)
+            ? rec.priorReceipts.map(function (pr) { return Object.assign({}, pr); })
+            : []
+        });
+      }
+
+      const AUDIT_RECORDS = INITIAL_AUDIT_RECORDS.map(cloneRecord);
+
+      /* Append-Only Historical Attestation & Obligation Ledger (PP-03) */
+      const attestationHistory = [];
+
+      function appendAttestationHistory(entry) {
+        if (!entry || typeof entry !== "object") return null;
+        const dup = attestationHistory.some(function (h) {
+          return (
+            h.accountId === entry.accountId &&
+            h.pageId === entry.pageId &&
+            h.version === entry.version &&
+            h.status === entry.status &&
+            h.sha256 === entry.sha256 &&
+            h.dueDate === entry.dueDate
+          );
+        });
+        if (dup) return null;
+        const immutableEntry = Object.assign(
+          {
+            historySeq: attestationHistory.length + 1,
+            recordedUtc: new Date().toISOString().replace(/\.\d{3}Z$/, "Z")
+          },
+          entry
+        );
+        attestationHistory.push(immutableEntry);
+        return immutableEntry;
+      }
+
+      function seedInitialAttestationHistory() {
+        attestationHistory.length = 0;
+        AUDIT_RECORDS.forEach(function (r) {
+          if (r.status === "ACKNOWLEDGED" && r.sha256) {
+            appendAttestationHistory({
+              recordId: r.id,
+              accountId: r.accountId,
+              name: r.name,
+              email: r.email,
+              dept: r.dept,
+              pageId: r.pageId,
+              sopCode: r.sopCode,
+              sopTitle: r.sopTitle,
+              version: r.signedVersion || r.version,
+              signedVersion: r.signedVersion || r.version,
+              dueDate: r.dueDate,
+              status: "ACKNOWLEDGED",
+              signedUtc: r.signedUtc,
+              sha256: r.sha256,
+              supersededByVersion: null
+            });
+          }
+        });
+      }
+
+      function getOverdueSignature() {
+        return AUDIT_RECORDS
+          .filter(function (r) { return r.status === "OVERDUE"; })
+          .map(function (r) { return r.id + ":" + r.dueDate + ":" + (r.currentVersion || r.version); })
+          .sort()
+          .join("|");
+      }
+
+      function evaluateAllRecordStatuses(nowMs) {
+        const refMs = typeof nowMs === "number" && Number.isFinite(nowMs) ? nowMs : Date.now();
+        AUDIT_RECORDS.forEach(function (r) {
+          if (r.status === "ACKNOWLEDGED") {
+            r.overdueDays = 0;
+            return;
+          }
+          const daysOverdue = getOverdueDaysUtc(r.dueDate, refMs);
+          if (daysOverdue > 0) {
+            r.status = "OVERDUE";
+            r.overdueDays = daysOverdue;
+          } else {
+            r.overdueDays = 0;
+            if (r.status === "OVERDUE") {
+              r.status = r.wasReack ? "PENDING_REACK" : "PENDING";
+            }
+          }
+        });
+        const nextSig = getOverdueSignature();
+        if (appState.lastOverdueSignature !== undefined && appState.lastOverdueSignature !== nextSig) {
+          appState.overdueNudgedUtc = "";
+        }
+        appState.lastOverdueSignature = nextSig;
+      }
+
+      seedInitialAttestationHistory();
+      evaluateAllRecordStatuses();
+
       function escapeHtml(str) {
-        return String(str)
+        return String(str == null ? "" : str)
           .replace(/&/g, "&amp;")
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;");
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
       }
 
       function showToast(title, detail, tone) {
@@ -2594,21 +2789,22 @@
           }).length;
           const allFolderChecked = selectedInFolder === pages.length;
 
+          const safeFolderId = escapeHtml(folder.id);
           html +=
             '<div class="tree-folder-block">' +
             '<div class="tree-folder-header">' +
             '<div class="folder-left">' +
             '<button type="button" id="sop-folder-toggle-' +
-            folder.id +
+            safeFolderId +
             '" class="folder-toggle-btn" data-folder-toggle="' +
-            folder.id +
+            safeFolderId +
             '" aria-label="Toggle folder">' +
             (isCollapsed ? "&#9656;" : "&#9662;") +
             "</button>" +
             '<input type="checkbox" id="sop-folder-check-' +
-            folder.id +
+            safeFolderId +
             '" data-folder-check="' +
-            folder.id +
+            safeFolderId +
             '" ' +
             (allFolderChecked ? "checked" : "") +
             ' aria-label="Select folder ' +
@@ -2629,14 +2825,15 @@
             pages.forEach(function (p) {
               const checked = appState.selectedPageIds.has(p.id);
               const assigned = appState.batchAssigned && checked;
+              const safePageId = escapeHtml(p.id);
               html +=
                 '<div class="sop-page-row ' +
                 (checked ? "is-selected" : "") +
                 '">' +
                 '<input type="checkbox" id="sop-page-check-' +
-                p.id +
+                safePageId +
                 '" data-page-check="' +
-                p.id +
+                safePageId +
                 '" ' +
                 (checked ? "checked" : "") +
                 ' aria-label="Select ' +
@@ -2656,7 +2853,7 @@
                 "</span>" +
                 (assigned
                   ? '<span class="status-pill pill-verified"><span class="dot dot-verified"></span>Assigned · ' +
-                    appState.groupCount +
+                    escapeHtml(appState.groupCount) +
                     "u</span>"
                   : checked
                   ? '<span class="status-pill pill-cobalt">Staged</span>'
@@ -2688,9 +2885,11 @@
         const bindings = selCount * appState.groupCount;
         document.getElementById("tree-selection-summary").innerHTML =
           "<strong>" +
-          selCount +
-          "</strong> of <strong>24</strong> SOP pages selected (" +
-          visibleCount +
+          escapeHtml(selCount) +
+          "</strong> of <strong>" +
+          escapeHtml(ALL_PAGES.length) +
+          "</strong> SOP pages selected (" +
+          escapeHtml(visibleCount) +
           " shown)";
         document.getElementById("summary-pages-count").textContent = selCount + " pages";
         document.getElementById("summary-users-count").textContent = appState.groupCount + " members";
@@ -2699,17 +2898,127 @@
         document.getElementById("summary-saved-edits").textContent =
           selCount + " manual saves → 1 click";
 
+        const btnSelectAll = document.getElementById("btn-select-all");
+        if (btnSelectAll) {
+          btnSelectAll.textContent =
+            selCount === ALL_PAGES.length ? "Clear All" : "Select All " + ALL_PAGES.length;
+        }
+
         const btnAssign = document.getElementById("btn-bulk-assign");
         const btnLabel = document.getElementById("btn-bulk-assign-label");
         btnAssign.disabled = selCount === 0;
         if (appState.batchAssigned) {
-          btnLabel.textContent = selCount + " Pages Assigned · Batch #" + appState.batchId;
+          btnLabel.textContent = selCount + " Pages Staged · Batch #" + appState.batchId;
         } else {
           btnLabel.textContent = "Assign " + selCount + " Pages in 1 Click";
         }
+        syncGlobalBatchIndicator();
         if (typeof renderAuditorMatrix === "function") {
           renderAuditorMatrix();
         }
+      }
+
+      function syncGlobalBatchIndicator() {
+        const globalPill = document.getElementById("global-batch-indicator");
+        if (!globalPill) return;
+        const count = appState.selectedPageIds.size;
+        if (appState.batchAssigned) {
+          globalPill.className = "status-pill pill-verified";
+          globalPill.innerHTML =
+            '<span class="dot dot-verified"></span>Simulated Batch #' +
+            escapeHtml(appState.batchId) +
+            " · " +
+            escapeHtml(count) +
+            " SOPs × " +
+            escapeHtml(appState.groupCount) +
+            "u";
+        } else {
+          globalPill.className = "status-pill pill-cobalt";
+          globalPill.innerHTML =
+            '<span class="dot dot-cobalt"></span>' +
+            escapeHtml(count) +
+            " SOPs Staged · " +
+            escapeHtml(appState.groupName) +
+            " (" +
+            escapeHtml(appState.groupCount) +
+            ")";
+        }
+      }
+
+      function syncSpaceChrome() {
+        const crumb = document.getElementById("space-crumb-pill");
+        if (crumb) {
+          crumb.textContent = "Space: " + appState.spaceKey + " · " + appState.spaceLabel;
+        }
+      }
+
+      function syncDynamicSlaButtons() {
+        document.querySelectorAll("[data-due-days]").forEach(function (btn) {
+          const days = parseInt(btn.getAttribute("data-due-days"), 10);
+          if (Number.isFinite(days)) {
+            btn.setAttribute("data-due", computeUtcDateOffset(days));
+          }
+        });
+        const dueInput = document.getElementById("due-date-input");
+        if (dueInput && !dueInput.value) {
+          dueInput.value = appState.dueDate;
+        }
+      }
+
+      function markBatchDraft() {
+        appState.batchAssigned = false;
+        const progressWrap = document.getElementById("batch-progress-wrap");
+        if (progressWrap) progressWrap.classList.remove("visible");
+        const banner = document.getElementById("batch-receipt-banner");
+        if (banner) banner.classList.remove("visible");
+        const badge = document.getElementById("pack-mode-badge");
+        if (badge) {
+          badge.className = "status-pill pill-neutral mono";
+          badge.textContent = "DRAFT PACK";
+        }
+        syncGlobalBatchIndicator();
+      }
+
+      function propagateBatchDueDate(newDueDate, opts) {
+        const options = opts || {};
+        const cleanDue = String(newDueDate || "").trim() || DEFAULT_DUE_DATE;
+        const isPastDue = getOverdueDaysUtc(cleanDue) > 0;
+        const minMajorFutureDue = computeUtcDateOffset(7);
+        appState.dueDate = cleanDue;
+        AUDIT_RECORDS.forEach(function (r) {
+          if (r.status === "ACKNOWLEDGED") return;
+          if (r.id === "rec-alex" || r.batchEditable) {
+            // P2-10: Never retroactively backdate freshly bumped major revisions (v4.0+) into the past
+            if (r.majorRevisionFresh && isPastDue) {
+              if (getOverdueDaysUtc(r.dueDate) > 0) {
+                r.dueDate = minMajorFutureDue;
+              }
+              return;
+            }
+            if (options.fromBulkAssign && r.majorRevisionFresh && isPastDue) {
+              return;
+            }
+            r.dueDate = cleanDue;
+          }
+        });
+        evaluateAllRecordStatuses();
+        syncAlexStateFromRecord();
+      }
+
+      function updateGuardHelperText() {
+        const el = document.getElementById("guard-helper-text");
+        if (!el) return;
+        el.textContent = appState.smartRevisionGuard
+          ? "Active via avi:confluence:updated:page: minor edits (" +
+            appState.currentPageVersion +
+            " → " +
+            nextMinorVersion(appState.currentPageVersion) +
+            ") preserve valid employee receipts; major bumps (" +
+            appState.currentPageVersion +
+            " → " +
+            nextMajorVersion(appState.currentPageVersion) +
+            ") archive prior receipts and re-request acknowledgment."
+          : "Strict Every-Edit Mode: any minor edit (including typo fixes) will archive prior receipts and re-request sign-off across all assigned members.";
       }
 
       document.getElementById("sop-tree-root").addEventListener("click", function (ev) {
@@ -2732,7 +3041,7 @@
           const pid = pageChk.getAttribute("data-page-check");
           if (pageChk.checked) appState.selectedPageIds.add(pid);
           else appState.selectedPageIds.delete(pid);
-          appState.batchAssigned = false;
+          markBatchDraft();
           renderSopTree();
           return;
         }
@@ -2745,7 +3054,7 @@
               if (folderChk.checked) appState.selectedPageIds.add(p.id);
               else appState.selectedPageIds.delete(p.id);
             });
-            appState.batchAssigned = false;
+            markBatchDraft();
             renderSopTree();
           }
         }
@@ -2765,7 +3074,7 @@
           });
           const cqlInput = document.getElementById("cql-input");
           if (preset === "all") {
-            cqlInput.value = 'label = "iso27001-mandatory" AND space = "IS"';
+            cqlInput.value = 'label = "iso27001-mandatory" AND space = "' + appState.spaceKey + '"';
             ALL_PAGES.forEach(function (p) { appState.selectedPageIds.add(p.id); });
           } else if (preset === "access") {
             cqlInput.value = 'label = "iso27001-mandatory" AND ancestor = 48291040';
@@ -2778,7 +3087,7 @@
               appState.selectedPageIds.add(p.id);
             });
           }
-          appState.batchAssigned = false;
+          markBatchDraft();
           renderSopTree();
         });
       });
@@ -2786,41 +3095,52 @@
       document.getElementById("btn-select-all").addEventListener("click", function () {
         if (appState.selectedPageIds.size === ALL_PAGES.length) {
           appState.selectedPageIds.clear();
-          document.getElementById("btn-select-all").textContent = "Select All 24";
         } else {
           ALL_PAGES.forEach(function (p) { appState.selectedPageIds.add(p.id); });
-          document.getElementById("btn-select-all").textContent = "Clear All";
         }
-        appState.batchAssigned = false;
+        markBatchDraft();
         renderSopTree();
       });
 
       document.getElementById("space-select").addEventListener("change", function (ev) {
-        const key = ev.target.value;
+        const key = String(ev.target.value || "IS").trim() || "IS";
+        appState.spaceKey = key;
+        appState.spaceLabel = SPACE_META[key] || ("Confluence Space " + key);
         document.getElementById("cql-input").value =
           'label = "iso27001-mandatory" AND space = "' + key + '"';
-        appState.batchAssigned = false;
+        syncSpaceChrome();
+        markBatchDraft();
         renderSopTree();
       });
 
       document.getElementById("group-select").addEventListener("change", function (ev) {
-        const opt = ev.target.selectedOptions[0];
+        const opt = ev.target.selectedOptions && ev.target.selectedOptions[0];
         appState.groupName = "@" + ev.target.value;
-        appState.groupCount = parseInt(opt.getAttribute("data-count"), 10) || 68;
-        appState.batchAssigned = false;
+        appState.groupCount = parseInt(opt && opt.getAttribute("data-count"), 10) || 68;
+        markBatchDraft();
         renderSopTree();
+        renderBylineState();
       });
 
       document.querySelectorAll("[data-due]").forEach(function (btn) {
         btn.addEventListener("click", function () {
-          const d = btn.getAttribute("data-due");
-          appState.dueDate = d;
+          const daysAttr = btn.getAttribute("data-due-days");
+          const d = daysAttr ? computeUtcDateOffset(parseInt(daysAttr, 10)) : btn.getAttribute("data-due");
           document.getElementById("due-date-input").value = d;
+          propagateBatchDueDate(d);
+          markBatchDraft();
+          renderSopTree();
+          renderBylineState();
+          renderAuditorMatrix();
         });
       });
 
       document.getElementById("due-date-input").addEventListener("change", function (ev) {
-        appState.dueDate = ev.target.value || "2026-12-08";
+        propagateBatchDueDate(ev.target.value || DEFAULT_DUE_DATE);
+        markBatchDraft();
+        renderSopTree();
+        renderBylineState();
+        renderAuditorMatrix();
       });
 
       function parseVersionParts(ver) {
@@ -2874,31 +3194,89 @@
         appState.alexSha256 = alexRow.sha256 || "";
       }
 
+      function archiveReceiptBeforeReack(r, nextVer) {
+        if (!Array.isArray(r.priorReceipts)) r.priorReceipts = [];
+        if (r.status === "ACKNOWLEDGED" && r.sha256) {
+          const archived = {
+            recordId: r.id,
+            accountId: r.accountId,
+            name: r.name,
+            email: r.email,
+            dept: r.dept,
+            pageId: r.pageId,
+            sopCode: r.sopCode,
+            sopTitle: r.sopTitle,
+            version: r.signedVersion || r.version,
+            signedVersion: r.signedVersion || r.version,
+            dueDate: r.dueDate,
+            status: "ACKNOWLEDGED",
+            signedUtc: r.signedUtc,
+            sha256: r.sha256,
+            supersededByVersion: nextVer
+          };
+          appendAttestationHistory(archived);
+          r.priorReceipts.push(archived);
+        } else if (r.status === "OVERDUE") {
+          const archivedOverdue = {
+            recordId: r.id,
+            accountId: r.accountId,
+            name: r.name,
+            email: r.email,
+            dept: r.dept,
+            pageId: r.pageId,
+            sopCode: r.sopCode,
+            sopTitle: r.sopTitle,
+            version: r.currentVersion || r.version,
+            signedVersion: "",
+            dueDate: r.dueDate,
+            status: "OVERDUE_ARCHIVED",
+            signedUtc: "",
+            sha256: "",
+            supersededByVersion: nextVer
+          };
+          appendAttestationHistory(archivedOverdue);
+          r.priorReceipts.push(archivedOverdue);
+        }
+      }
+
       function applyPol007RevisionPolicy(nextVer, isMajor) {
         const nextParts = parseVersionParts(nextVer);
+        const freshFutureDue =
+          getOverdueDaysUtc(appState.dueDate) === 0 ? appState.dueDate : computeUtcDateOffset(14);
         let anyInvalidated = false;
 
         AUDIT_RECORDS.forEach(function (r) {
           if (r.pageId !== "48291044") return;
-          r.currentVersion = nextVer;
-          r.version = nextVer;
 
           if (isMajor) {
-            if (r.status === "ACKNOWLEDGED" || r.status === "PENDING" || r.status === "PENDING_REACK") {
-              r.status = "PENDING_REACK";
-              r.signedVersion = "";
-              r.signedUtc = "";
-              r.sha256 = "";
-              anyInvalidated = true;
-            }
+            // Append-only: archive prior ACKNOWLEDGED receipt or prior OVERDUE obligation before issuing fresh major obligation
+            archiveReceiptBeforeReack(r, nextVer);
+            r.currentVersion = nextVer;
+            r.version = nextVer;
+            r.status = "PENDING_REACK";
+            r.wasReack = true;
+            r.majorRevisionFresh = true;
+            r.dueDate = freshFutureDue;
+            r.overdueDays = 0;
+            r.signedVersion = "";
+            r.signedUtc = "";
+            r.sha256 = "";
+            r.nudgedAt = "";
+            anyInvalidated = true;
             return;
           }
+
+          r.currentVersion = nextVer;
+          r.version = nextVer;
 
           if (appState.smartRevisionGuard) {
             if (r.status === "ACKNOWLEDGED" && r.signedVersion) {
               const signedParts = parseVersionParts(r.signedVersion);
               if (signedParts.major !== nextParts.major) {
+                archiveReceiptBeforeReack(r, nextVer);
                 r.status = "PENDING_REACK";
+                r.wasReack = true;
+                r.dueDate = freshFutureDue;
                 r.signedVersion = "";
                 r.signedUtc = "";
                 r.sha256 = "";
@@ -2907,7 +3285,10 @@
             }
           } else {
             if ((r.status === "ACKNOWLEDGED" && r.signedVersion !== nextVer) || r.status === "PENDING") {
+              archiveReceiptBeforeReack(r, nextVer);
               r.status = "PENDING_REACK";
+              r.wasReack = true;
+              r.dueDate = freshFutureDue;
               r.signedVersion = "";
               r.signedUtc = "";
               r.sha256 = "";
@@ -2916,14 +3297,22 @@
           }
         });
 
+        if (isMajor && getOverdueDaysUtc(appState.dueDate) > 0) {
+          appState.dueDate = freshFutureDue;
+          const dueInputEl = document.getElementById("due-date-input");
+          if (dueInputEl) dueInputEl.value = freshFutureDue;
+        }
         if (isMajor || anyInvalidated) {
           appState.pol007CohortPreserved = false;
         }
+        evaluateAllRecordStatuses();
         syncAlexStateFromRecord();
       }
 
       document.getElementById("toggle-revision-guard").addEventListener("change", function (ev) {
         appState.smartRevisionGuard = ev.target.checked;
+        markBatchDraft();
+        renderSopTree();
         if (!appState.smartRevisionGuard) {
           const hadMinorDrift = AUDIT_RECORDS.some(function (r) {
             return r.pageId === "48291044" && r.status === "ACKNOWLEDGED" && r.signedVersion !== appState.currentPageVersion;
@@ -2938,25 +3327,15 @@
               priorSigned +
               " → " +
               appState.currentPageVersion +
-              ": Revision Guard switched OFF, invalidating prior POL-007 receipts to PENDING_REACK across all assigned members.";
+              ": Revision Guard switched OFF — prior POL-007 SHA-256 receipts were preserved in append-only history and fresh PENDING_REACK obligations were issued.";
             renderBylineState();
             renderAuditorMatrix();
           }
         }
-        document.getElementById("guard-helper-text").textContent = appState.smartRevisionGuard
-          ? "Active via avi:confluence:updated:page: minor edits (" +
-            appState.currentPageVersion +
-            " → " +
-            nextMinorVersion(appState.currentPageVersion) +
-            ") preserve valid employee receipts; major bumps (" +
-            appState.currentPageVersion +
-            " → " +
-            nextMajorVersion(appState.currentPageVersion) +
-            ") re-request acknowledgment."
-          : "Strict Every-Edit Mode: any minor edit (including typo fixes) will re-request sign-off across all assigned members.";
+        updateGuardHelperText();
       });
 
-      /* 1-Click Bulk Assign Action */
+      /* 1-Click Bulk Assign Action (Client-Side Simulation) */
       document.getElementById("btn-bulk-assign").addEventListener("click", function () {
         const count = appState.selectedPageIds.size;
         if (count === 0) return;
@@ -2972,43 +3351,36 @@
           progressFill.style.width = "100%";
         });
 
+        propagateBatchDueDate(appState.dueDate, { fromBulkAssign: true });
         appState.batchAssigned = true;
         badge.className = "status-pill pill-verified mono";
-        badge.textContent = "ACTIVE · #" + appState.batchId;
+        badge.textContent = "SIMULATED · #" + appState.batchId;
 
         document.getElementById("batch-receipt-title").textContent =
-          "Batch #" + appState.batchId + " Assigned Across " + count + " SOP Pages";
+          "Simulated Batch #" + appState.batchId + " Staged Across " + count + " SOP Pages";
         document.getElementById("batch-receipt-detail").textContent =
           bindings.toLocaleString("en-US") +
-          " Forge SQL read-confirmation bindings active for " +
+          " simulated read-confirmation bindings staged locally for " +
           appState.groupName +
           " (" +
           appState.groupCount +
-          " members) · Due " +
+          " members) · Space " +
+          appState.spaceKey +
+          " · Due " +
           appState.dueDate +
           " · Smart Revision Guard: " +
           (appState.smartRevisionGuard ? "Major-Only" : "Every-Edit") +
-          ".";
+          " (sample data only — no live Forge SQL write).";
         banner.classList.add("visible");
 
-        const globalPill = document.getElementById("global-batch-indicator");
-        globalPill.className = "status-pill pill-verified";
-        globalPill.innerHTML =
-          '<span class="dot dot-verified"></span>Batch #' +
-          appState.batchId +
-          " Live · " +
-          count +
-          " SOPs × " +
-          appState.groupCount +
-          "u";
-
         renderSopTree();
+        renderBylineState();
         showToast(
-          "Assigned " + count + " SOP Pages in 1 Click",
+          "Simulated Assignment of " + count + " SOP Pages",
           bindings.toLocaleString("en-US") +
-            " read-confirmation records committed to Forge SQL for " +
+            " sample read-confirmation records staged in browser memory for " +
             appState.groupName +
-            ".",
+            " (client-side simulation).",
           "verified"
         );
         window.__qaTelemetry.interactions.push("bulkAssign:" + count);
@@ -3016,12 +3388,75 @@
 
       document.getElementById("btn-reset-batch").addEventListener("click", function () {
         appState.batchAssigned = false;
+        appState.spaceKey = "IS";
+        appState.spaceLabel = SPACE_META.IS;
+        appState.selectedPageIds = new Set(ALL_PAGES.map(function (p) { return p.id; }));
+        appState.collapsedFolders.clear();
+        appState.treeSearch = "";
+        appState.preset = "all";
+        appState.groupName = "@all-employees";
+        appState.groupCount = 68;
+        appState.dueDate = DEFAULT_DUE_DATE;
+        appState.smartRevisionGuard = true;
+        appState.pol007CohortPreserved = true;
+        appState.currentPageVersion = "v3.0";
+        appState.currentPageVersionType = "Major";
+        appState.overdueNudgedUtc = "";
+        appState.statusFilter = "ALL";
+        appState.sopFilter = "ALL";
+        appState.deptFilter = "ALL";
+        appState.matrixSearch = "";
+
+        AUDIT_RECORDS.length = 0;
+        INITIAL_AUDIT_RECORDS.forEach(function (rec) {
+          AUDIT_RECORDS.push(cloneRecord(rec));
+        });
+        syncPol007PageMetadata("v3.0", true);
+        seedInitialAttestationHistory();
+        evaluateAllRecordStatuses();
+        syncAlexStateFromRecord();
+
+        const spaceSel = document.getElementById("space-select");
+        if (spaceSel) spaceSel.value = "IS";
+        const groupSel = document.getElementById("group-select");
+        if (groupSel) groupSel.value = "all-employees";
+        const dueInput = document.getElementById("due-date-input");
+        if (dueInput) dueInput.value = DEFAULT_DUE_DATE;
+        const revToggle = document.getElementById("toggle-revision-guard");
+        if (revToggle) revToggle.checked = true;
+        const cqlInput = document.getElementById("cql-input");
+        if (cqlInput) cqlInput.value = 'label = "iso27001-mandatory" AND space = "IS"';
+        const treeSearch = document.getElementById("tree-search");
+        if (treeSearch) treeSearch.value = "";
+        const sopFilter = document.getElementById("matrix-sop-filter");
+        if (sopFilter) sopFilter.value = "ALL";
+        const deptFilter = document.getElementById("matrix-dept-filter");
+        if (deptFilter) deptFilter.value = "ALL";
+        const matrixSearch = document.getElementById("matrix-search");
+        if (matrixSearch) matrixSearch.value = "";
+
+        document.querySelectorAll("[data-preset]").forEach(function (c) {
+          c.classList.toggle("active", c.getAttribute("data-preset") === "all");
+        });
+        document.querySelectorAll("[data-status-filter]").forEach(function (p) {
+          p.classList.toggle("active", p.getAttribute("data-status-filter") === "ALL");
+        });
+
         document.getElementById("batch-progress-wrap").classList.remove("visible");
         document.getElementById("batch-receipt-banner").classList.remove("visible");
         const badge = document.getElementById("pack-mode-badge");
         badge.className = "status-pill pill-neutral mono";
         badge.textContent = "DRAFT PACK";
+        const simNote = document.getElementById("revision-sim-note");
+        if (simNote) {
+          simNote.textContent =
+            "Simulate how Confluence page edits affect employee sign-offs when Major-Only Guard is active:";
+        }
+        syncSpaceChrome();
+        updateGuardHelperText();
         renderSopTree();
+        renderBylineState();
+        renderAuditorMatrix();
       });
 
       document.getElementById("btn-jump-byline").addEventListener("click", function () {
@@ -3050,7 +3485,10 @@
           canonicalPayload && sha256 && sha256Hex(canonicalPayload) === sha256
         );
         return {
-          schema: "policypulse.forge.receipt.v1",
+          schema: "policypulse.simulation.receipt.v1",
+          simulationMode: true,
+          simulationNotice: SIMULATION_NOTICE_VALUE,
+          spaceKey: appState.spaceKey,
           batchId: appState.batchId,
           accountId: accountId,
           principal: "alex.rivera@vanta-fin.io",
@@ -3140,7 +3578,7 @@
           pill.innerHTML =
             '<span class="dot dot-verified"></span><span>PolicyPulse: Acknowledged ' +
             escapeHtml(signedVer) +
-            (preservedMinor ? " · Valid on " + escapeHtml(curVer) : " · Verified") +
+            (preservedMinor ? " · Valid on " + escapeHtml(curVer) : " · Simulated Receipt") +
             "</span>";
 
           banner.classList.add("is-acknowledged");
@@ -3149,17 +3587,17 @@
             escapeHtml(signedVer) +
             (preservedMinor
               ? " Acknowledged (Preserved on " + escapeHtml(curVer) + ")"
-              : " Acknowledged &amp; Integrity Digest Bound") +
+              : " Acknowledged &amp; Integrity Digest Bound (Simulation)") +
             "</span>" +
             '<span class="status-pill pill-verified mono" style="font-size:10.5px;">SHA-256: ' +
-            appState.alexSha256.slice(0, 12) +
+            escapeHtml(appState.alexSha256.slice(0, 12)) +
             "…</span>";
           subtext.innerHTML =
             "Signed by <strong>Alex Rivera</strong> (<span class=\"mono\">712020:8f4c9a1e…d0f9b2</span>) on <span class=\"mono\">" +
             escapeHtml(signedVer) +
             "</span> at <span class=\"mono\">" +
             escapeHtml(appState.alexSignedUtc) +
-            "</span>. Stored immutably in Atlassian Forge SQL.";
+            "</span>. Computed client-side in browser simulation (sample data only; Atlassian Forge SQL backend in development).";
 
           btnAck.className = "btn btn-secondary";
           btnAck.disabled = true;
@@ -3167,22 +3605,28 @@
           btnAckLabel.textContent = "Acknowledged " + signedVer;
 
           receiptBadge.className = "status-pill pill-verified";
-          receiptBadge.textContent = "VERIFIED · FORGE SQL";
+          receiptBadge.textContent = "SIMULATED · CLIENT SHA-256";
           document.getElementById("receipt-utc").textContent = appState.alexSignedUtc;
           document.getElementById("receipt-sha256").textContent = appState.alexSha256;
         } else {
           const isReack = appState.alexStatus === "PENDING_REACK";
+          const isOverdue = appState.alexStatus === "OVERDUE";
+          const alexDueDate = (AUDIT_RECORDS[0] && AUDIT_RECORDS[0].dueDate) || appState.dueDate;
           document.getElementById("receipt-page-ver").textContent =
             "Page 48291044 · POL-007 · " + curVer + " (" + curType + ")";
 
-          pill.className = "status-pill pill-pending";
+          pill.className = isOverdue ? "status-pill pill-overdue" : "status-pill pill-pending";
           pill.innerHTML =
-            '<span class="dot dot-pending"></span><span>PolicyPulse: ' +
-            (isReack
+            '<span class="dot ' +
+            (isOverdue ? "dot-overdue" : "dot-pending") +
+            '"></span><span>PolicyPulse: ' +
+            (isOverdue
+              ? "Overdue Acknowledgment (" + escapeHtml(curVer) + ")"
+              : isReack
               ? "Re-Acknowledgment Required (" + escapeHtml(curVer) + ")"
               : "Pending Acknowledgment") +
             " · Due " +
-            escapeHtml(appState.dueDate) +
+            escapeHtml(alexDueDate) +
             "</span>";
 
           banner.classList.remove("is-acknowledged");
@@ -3205,12 +3649,16 @@
           btnAck.removeAttribute("aria-disabled");
           btnAckLabel.textContent = "Acknowledge Policy " + curVer;
 
-          receiptBadge.className = "status-pill pill-pending";
-          receiptBadge.textContent = isReack ? "Pending Re-Ack" : "Awaiting Sign-Off";
+          receiptBadge.className = isOverdue ? "status-pill pill-overdue" : "status-pill pill-pending";
+          receiptBadge.textContent = isOverdue
+            ? "Overdue"
+            : isReack
+            ? "Pending Re-Ack"
+            : "Awaiting Sign-Off";
           document.getElementById("receipt-utc").textContent =
             "— (Click \"Acknowledge Policy " + curVer + "\")";
           document.getElementById("receipt-sha256").textContent =
-            "Pending employee signature on Access Control & MFA Policy " + curVer;
+            "Pending simulated employee signature on Access Control & MFA Policy " + curVer;
         }
       }
 
@@ -3226,18 +3674,38 @@
 
         const alexRow = AUDIT_RECORDS[0];
         alexRow.status = "ACKNOWLEDGED";
+        alexRow.overdueDays = 0;
+        alexRow.majorRevisionFresh = false;
         alexRow.currentVersion = appState.currentPageVersion;
         alexRow.version = appState.currentPageVersion;
         alexRow.signedVersion = signedVer;
         alexRow.signedUtc = nowUtc;
         alexRow.sha256 = digest;
+        evaluateAllRecordStatuses();
+        appendAttestationHistory({
+          recordId: alexRow.id,
+          accountId: alexRow.accountId,
+          name: alexRow.name,
+          email: alexRow.email,
+          dept: alexRow.dept,
+          pageId: alexRow.pageId,
+          sopCode: alexRow.sopCode,
+          sopTitle: alexRow.sopTitle,
+          version: signedVer,
+          signedVersion: signedVer,
+          dueDate: alexRow.dueDate,
+          status: "ACKNOWLEDGED",
+          signedUtc: nowUtc,
+          sha256: digest,
+          supersededByVersion: null
+        });
         syncAlexStateFromRecord();
 
         renderBylineState();
         renderAuditorMatrix();
         showToast(
-          "Acknowledged Access Control & MFA Policy " + signedVer,
-          "Recorded SHA-256 audit receipt " + digest.slice(0, 16) + "… at " + nowUtc,
+          "Simulated Acknowledgment for Policy " + signedVer,
+          "Computed client-side SHA-256 preview digest " + digest.slice(0, 16) + "… at " + nowUtc + " (sample data).",
           "verified"
         );
         window.__qaTelemetry.interactions.push("acknowledge:" + signedVer);
@@ -3250,8 +3718,8 @@
         const copied = await copyTextWithFallback(jsonText);
         if (copied) {
           showToast(
-            "Copied Audit Receipt JSON",
-            "Immutable Forge SQL receipt payload copied to clipboard.",
+            "Copied Audit Receipt JSON (Simulation)",
+            "Client-side simulated receipt preview payload copied to clipboard (sample data only).",
             "verified"
           );
           window.__qaTelemetry.interactions.push("copyReceipt:ok");
@@ -3273,6 +3741,7 @@
         appState.currentPageVersionType = "Minor Typo Fix";
         syncPol007PageMetadata(nextVer, false);
         applyPol007RevisionPolicy(nextVer, false);
+        updateGuardHelperText();
         document.getElementById("revision-sim-note").textContent = appState.smartRevisionGuard
           ? priorSignedRef +
             " → " +
@@ -3285,7 +3754,7 @@
           : priorSignedRef +
             " → " +
             nextVer +
-            ": Revision Guard was OFF, so POL-007 status invalidated to PENDING_REACK and prior signature fields were cleared.";
+            ": Revision Guard was OFF — prior POL-007 SHA-256 receipts were archived in append-only history and fresh PENDING_REACK obligations were issued.";
         renderSopTree();
         renderBylineState();
         renderAuditorMatrix();
@@ -3300,13 +3769,14 @@
         appState.currentPageVersionType = "Major";
         syncPol007PageMetadata(nextVer, true);
         applyPol007RevisionPolicy(nextVer, true);
+        updateGuardHelperText();
         document.getElementById("revision-sim-note").textContent =
           priorSignedRef +
           " → " +
           nextVer +
-          " (Major Policy Change): Smart Revision Guard invalidated prior POL-007 receipts (PENDING_REACK) and requested fresh " +
+          " (Major Policy Change): Prior POL-007 SHA-256 receipts & overdue logs were preserved in append-only attestationHistory[], and fresh " +
           nextVer +
-          " sign-off.";
+          " PENDING_REACK obligations were issued.";
         renderSopTree();
         renderBylineState();
         renderAuditorMatrix();
@@ -3314,28 +3784,70 @@
       });
 
       /* VIEW 3: ISO 27001 / SOC 2 Auditor Matrix */
+      function getScopedAuditRecords() {
+        if (appState.selectedPageIds.size === 0) return [];
+        return AUDIT_RECORDS.filter(function (r) {
+          return appState.selectedPageIds.has(r.pageId);
+        });
+      }
+
+      function getFilteredAuditRecords() {
+        const scoped = getScopedAuditRecords();
+        const q = appState.matrixSearch.trim().toLowerCase();
+        return scoped.filter(function (r) {
+          if (appState.statusFilter !== "ALL") {
+            if (appState.statusFilter === "PENDING") {
+              if (r.status !== "PENDING" && r.status !== "PENDING_REACK") return false;
+            } else if (r.status !== appState.statusFilter) {
+              return false;
+            }
+          }
+          if (appState.sopFilter !== "ALL" && r.sopCode !== appState.sopFilter) return false;
+          if (appState.deptFilter !== "ALL" && r.dept !== appState.deptFilter) return false;
+          if (!q) return true;
+          return (
+            r.name.toLowerCase().indexOf(q) !== -1 ||
+            r.email.toLowerCase().indexOf(q) !== -1 ||
+            r.accountId.toLowerCase().indexOf(q) !== -1 ||
+            r.sopCode.toLowerCase().indexOf(q) !== -1 ||
+            r.sopTitle.toLowerCase().indexOf(q) !== -1 ||
+            r.sha256.toLowerCase().indexOf(q) !== -1
+          );
+        });
+      }
+
       function renderAuditorMatrix() {
-        const pendingCount = AUDIT_RECORDS.filter(function (r) {
+        evaluateAllRecordStatuses();
+        const scopedRecords = getScopedAuditRecords();
+        const pendingCount = scopedRecords.filter(function (r) {
           return r.status === "PENDING" || r.status === "PENDING_REACK";
         }).length;
-        const ackSampleCount = AUDIT_RECORDS.filter(function (r) { return r.status === "ACKNOWLEDGED"; }).length;
-        const overdueCount = AUDIT_RECORDS.filter(function (r) { return r.status === "OVERDUE"; }).length;
+        const ackSampleCount = scopedRecords.filter(function (r) { return r.status === "ACKNOWLEDGED"; }).length;
+        const overdueCount = scopedRecords.filter(function (r) { return r.status === "OVERDUE"; }).length;
 
         const scopedPages = appState.selectedPageIds.size;
         const groupCount = appState.groupCount;
         const totalBindings = scopedPages * groupCount;
         const hasPol007 = appState.selectedPageIds.has("48291044");
         const otherPages = Math.max(0, scopedPages - (hasPol007 ? 1 : 0));
-        const sampledPol007Ack = AUDIT_RECORDS.filter(function (r) {
-          return r.pageId === "48291044" && r.status === "ACKNOWLEDGED";
+        const sampledPol007Rows = scopedRecords.filter(function (r) {
+          return r.pageId === "48291044";
+        });
+        const sampledPol007Ack = sampledPol007Rows.filter(function (r) {
+          return r.status === "ACKNOWLEDGED";
         }).length;
+        const pol007SampleOverdue = sampledPol007Rows.filter(function (r) {
+          return r.status === "OVERDUE";
+        }).length;
+        const unsampledPol007Cohort = Math.max(0, groupCount - sampledPol007Rows.length);
+        const nonPol007Overdue = Math.max(0, overdueCount - pol007SampleOverdue);
         const unsampledPol007Ack = appState.pol007CohortPreserved
-          ? Math.max(0, groupCount - 8)
+          ? Math.max(0, unsampledPol007Cohort - nonPol007Overdue)
           : 0;
         const pol007Ack = hasPol007
           ? Math.min(groupCount, sampledPol007Ack + unsampledPol007Ack)
           : 0;
-        const otherAck = otherPages * Math.max(0, groupCount - 4);
+        const otherAck = otherPages * Math.max(0, groupCount - Math.min(groupCount, overdueCount));
         const ackBindings = Math.min(totalBindings, otherAck + pol007Ack);
         const pct = totalBindings > 0 ? ((ackBindings / totalBindings) * 100).toFixed(1) : "0.0";
         const effectiveOverdue = scopedPages > 0 ? overdueCount : 0;
@@ -3356,7 +3868,7 @@
           ackBindings.toLocaleString("en-US") +
           " / " +
           totalBindings.toLocaleString("en-US") +
-          " SOP bindings · " +
+          " simulated bindings · " +
           pendingBindings.toLocaleString("en-US") +
           " pending · " +
           currentUsers +
@@ -3366,7 +3878,7 @@
 
         const overdueUsersEl = document.getElementById("kpi-overdue-users");
         if (overdueUsersEl) {
-          overdueUsersEl.textContent = effectiveOverdue + " Users";
+          overdueUsersEl.textContent = effectiveOverdue + (effectiveOverdue === 1 ? " User" : " Users");
         }
         if (!appState.overdueNudgedUtc) {
           document.getElementById("kpi-overdue-sub").textContent =
@@ -3375,7 +3887,14 @@
             pendingCount +
             " sampled pending (" +
             pendingBindings.toLocaleString("en-US") +
-            " bindings awaiting sign-off)";
+            " simulated bindings awaiting sign-off)";
+        }
+        const nudgeLabel = document.getElementById("btn-nudge-label");
+        if (nudgeLabel && !appState.overdueNudgedUtc) {
+          nudgeLabel.textContent =
+            "Simulate Nudge (" +
+            effectiveOverdue +
+            (effectiveOverdue === 1 ? " user)" : " users)");
         }
         const scopePagesEl = document.getElementById("kpi-scope-pages");
         if (scopePagesEl) {
@@ -3383,7 +3902,7 @@
         }
 
         document.getElementById("filter-pill-all").textContent =
-          "All Sampled Records (" + AUDIT_RECORDS.length + ")";
+          "All Sampled Records (" + scopedRecords.length + ")";
         document.getElementById("filter-pill-overdue").textContent =
           "Overdue (" + overdueCount + ")";
         document.getElementById("filter-pill-pending").textContent =
@@ -3391,27 +3910,20 @@
         document.getElementById("filter-pill-ack").textContent =
           "Acknowledged (" + ackSampleCount + ")";
 
-        const q = appState.matrixSearch.trim().toLowerCase();
-        const filtered = AUDIT_RECORDS.filter(function (r) {
-          if (appState.statusFilter !== "ALL") {
-            if (appState.statusFilter === "PENDING") {
-              if (r.status !== "PENDING" && r.status !== "PENDING_REACK") return false;
-            } else if (r.status !== appState.statusFilter) {
-              return false;
-            }
-          }
-          if (appState.sopFilter !== "ALL" && r.sopCode !== appState.sopFilter) return false;
-          if (appState.deptFilter !== "ALL" && r.dept !== appState.deptFilter) return false;
-          if (!q) return true;
-          return (
-            r.name.toLowerCase().indexOf(q) !== -1 ||
-            r.email.toLowerCase().indexOf(q) !== -1 ||
-            r.accountId.toLowerCase().indexOf(q) !== -1 ||
-            r.sopCode.toLowerCase().indexOf(q) !== -1 ||
-            r.sopTitle.toLowerCase().indexOf(q) !== -1 ||
-            r.sha256.toLowerCase().indexOf(q) !== -1
-          );
-        });
+        const filtered = getFilteredAuditRecords();
+        const exportBtnLabel = document.getElementById("btn-export-csv-label");
+        if (exportBtnLabel) {
+          const isFiltered =
+            appState.statusFilter !== "ALL" ||
+            appState.sopFilter !== "ALL" ||
+            appState.deptFilter !== "ALL" ||
+            Boolean(appState.matrixSearch.trim()) ||
+            appState.selectedPageIds.size !== ALL_PAGES.length;
+          exportBtnLabel.textContent =
+            (isFiltered ? "Export Filtered CSV (" : "Export Sample Auditor CSV (") +
+            filtered.length +
+            ")";
+        }
 
         const tbody = document.getElementById("matrix-tbody");
         let rowsHtml = "";
@@ -3421,10 +3933,13 @@
             statusHtml =
               '<span class="status-pill pill-verified"><span class="dot dot-verified"></span>Acknowledged</span>';
           } else if (r.status === "OVERDUE") {
+            const overdueDays = r.overdueDays || getOverdueDaysUtc(r.dueDate) || 1;
             statusHtml =
-              '<span class="status-pill pill-overdue"><span class="dot dot-overdue"></span>Overdue · 4d</span>' +
+              '<span class="status-pill pill-overdue"><span class="dot dot-overdue"></span>Overdue · ' +
+              escapeHtml(overdueDays) +
+              "d</span>" +
               (r.nudgedAt
-                ? ' <span class="status-pill pill-neutral mono" style="font-size:10px;">Nudged</span>'
+                ? ' <span class="status-pill pill-neutral mono" style="font-size:10px;">Simulated Nudge</span>'
                 : "");
           } else if (r.status === "PENDING_REACK") {
             statusHtml =
@@ -3440,6 +3955,11 @@
               ? curRowVer + " · signed " + r.signedVersion
               : curRowVer;
 
+          const lastPrior =
+            Array.isArray(r.priorReceipts) && r.priorReceipts.length > 0
+              ? r.priorReceipts[r.priorReceipts.length - 1]
+              : null;
+
           const evidenceHtml = r.sha256
             ? '<div class="mono" style="font-size:11px;color:var(--ink-secondary);">' +
               escapeHtml(r.signedUtc) +
@@ -3449,9 +3969,27 @@
               escapeHtml(r.sha256.slice(0, 14)) +
               "…</span>"
             : r.nudgedAt
-            ? '<span class="mono" style="font-size:11px;color:var(--overdue-ink);">Reminder sent ' +
+            ? '<span class="mono" style="font-size:11px;color:var(--overdue-ink);">Simulated reminder ' +
               escapeHtml(r.nudgedAt) +
               "</span>"
+            : lastPrior && lastPrior.sha256
+            ? '<div style="color:var(--ink-muted);font-size:11px;">Awaiting ' +
+              escapeHtml(curRowVer) +
+              ' sign-off</div><span class="hash-pill" title="Archived ' +
+              escapeHtml(lastPrior.version) +
+              " receipt: " +
+              escapeHtml(lastPrior.sha256) +
+              '">prior ' +
+              escapeHtml(lastPrior.version) +
+              ":" +
+              escapeHtml(lastPrior.sha256.slice(0, 10)) +
+              "…</span>"
+            : lastPrior
+            ? '<span style="color:var(--ink-muted);font-size:11.5px;">Awaiting ' +
+              escapeHtml(curRowVer) +
+              " sign-off (prior " +
+              escapeHtml(lastPrior.version) +
+              " archived)</span>"
             : '<span style="color:var(--ink-muted);font-size:11.5px;">Awaiting signature</span>';
 
           const isLiveRow = r.id === "rec-alex" && appState.alexAcknowledged;
@@ -3462,7 +4000,7 @@
             '<td><div class="user-cell"><span class="user-name">' +
             escapeHtml(r.name) +
             (isLiveRow
-              ? ' <span class="status-pill pill-cobalt" style="font-size:10px;padding:1px 5px;">LIVE</span>'
+              ? ' <span class="status-pill pill-cobalt" style="font-size:10px;padding:1px 5px;">SIMULATED</span>'
               : "") +
             '</span><span class="user-acct">' +
             escapeHtml(r.accountId.slice(0, 23)) +
@@ -3501,8 +4039,18 @@
           "Showing " +
           filtered.length +
           " of " +
-          AUDIT_RECORDS.length +
-          " sampled audit records (@all-employees · 68 members · 24 SOPs)";
+          scopedRecords.length +
+          " sampled audit records (" +
+          appState.groupName +
+          " · " +
+          appState.groupCount +
+          " members · " +
+          scopedPages +
+          " SOPs · Space " +
+          appState.spaceKey +
+          " · " +
+          attestationHistory.length +
+          " archived history entries)";
       }
 
       document.querySelectorAll("[data-status-filter]").forEach(function (pill) {
@@ -3530,40 +4078,87 @@
         renderAuditorMatrix();
       });
 
-      /* 1-Click Nudge Overdue (4 users) */
+      /* 1-Click Simulated Nudge Overdue (Confluence Preview Only — Zero Live Email Dispatch) */
       document.getElementById("btn-nudge-overdue").addEventListener("click", function () {
-        const nowTime = new Date().toISOString().slice(11, 19) + " UTC";
+        evaluateAllRecordStatuses();
+        const nowUtc = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
         const overdueUsers = [];
-        AUDIT_RECORDS.forEach(function (r) {
+        getScopedAuditRecords().forEach(function (r) {
           if (r.status === "OVERDUE") {
-            r.nudgedAt = nowTime;
+            r.nudgedAt = nowUtc;
             overdueUsers.push(r.name);
           }
         });
-        appState.overdueNudgedUtc = nowTime;
+        const count = overdueUsers.length;
+        if (count === 0) {
+          showToast(
+            "No Overdue Users in Current Scope",
+            "All scoped sample records are either acknowledged or within their UTC due date.",
+            "verified"
+          );
+          return;
+        }
+        appState.overdueNudgedUtc = nowUtc;
+        appState.lastOverdueSignature = getOverdueSignature();
         document.getElementById("kpi-overdue-sub").textContent =
-          "4 overdue users nudged at " + nowTime + " · Logged to audit trail";
+          count +
+          " overdue " +
+          (count === 1 ? "user" : "users") +
+          " simulated-nudged at " +
+          nowUtc +
+          " · Sample audit preview";
         document.getElementById("btn-nudge-label").textContent =
-          "Nudged 4 Overdue Users ✓";
+          "Simulated Nudge (" + count + " " + (count === 1 ? "user" : "users") + ") ✓";
         renderAuditorMatrix();
         showToast(
-          "Nudged 4 Overdue Users via Confluence & Email",
-          "Dispatched SLA escalation reminders to " + overdueUsers.join(", ") + " (" + nowTime + ").",
+          "Simulated Nudge for " + count + " Overdue " + (count === 1 ? "User" : "Users") + " (Confluence Preview)",
+          "Recorded simulated native Confluence reminder preview for " +
+            overdueUsers.join(", ") +
+            " at " +
+            nowUtc +
+            " (client-side simulation — no live emails dispatched).",
           "overdue"
         );
-        window.__qaTelemetry.interactions.push("nudgeOverdue:" + overdueUsers.length);
+        window.__qaTelemetry.interactions.push("nudgeOverdue:" + count);
       });
 
-      /* Working Export ISO 27001 Auditor CSV Download */
+      /* RFC 4180 + OWASP Formula-Guarded CSV Exporter (PP-01, PP-02, N-12) */
+      const CSV_INVISIBLE_CTRL_RE = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff]+/g;
+      const CSV_LEADING_STRIP_RE = /^[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff\s]+/;
+
+      function isDangerousFormulaPrefix(val) {
+        const raw = String(val == null ? "" : val);
+        if (!raw) return false;
+        if (/^[\t\r\n]/.test(raw)) return true;
+        const stripped = raw.replace(CSV_LEADING_STRIP_RE, "");
+        if (!stripped) return false;
+        const first = stripped[0];
+        if (first === "=" || first === "@") return true;
+        if (first === "+" || first === "-") {
+          return !/^[+-](?:\d+(?:,\d{3})*(?:\.\d+)?|\.\d+)%?$/.test(stripped.trim());
+        }
+        return false;
+      }
+
       function csvCell(val) {
-        const s = String(val == null ? "" : val);
-        if (s.indexOf(",") !== -1 || s.indexOf('"') !== -1 || s.indexOf("\n") !== -1) {
+        const raw = String(val == null ? "" : val);
+        const dangerous = isDangerousFormulaPrefix(raw);
+        let s = raw
+          .replace(CSV_INVISIBLE_CTRL_RE, "")
+          .replace(/[\t\r\n]+/g, " ")
+          .trim();
+        if (dangerous || isDangerousFormulaPrefix(s)) {
+          s = "'" + s;
+        }
+        if (/[",\r\n]/.test(s)) {
           return '"' + s.replace(/"/g, '""') + '"';
         }
         return s;
       }
 
       document.getElementById("btn-export-csv").addEventListener("click", function () {
+        evaluateAllRecordStatuses();
+        const filteredRecords = getFilteredAuditRecords();
         const headers = [
           "Audit_Control",
           "Space_Key",
@@ -3582,14 +4177,15 @@
           "Due_Date",
           "Status",
           "Acknowledged_UTC",
-          "Receipt_SHA256"
+          "Receipt_SHA256",
+          "Simulation_Notice"
         ];
         const lines = [headers.join(",")];
-        AUDIT_RECORDS.forEach(function (r) {
+        filteredRecords.forEach(function (r) {
           lines.push(
             [
               r.control,
-              "IS",
+              appState.spaceKey,
               appState.batchId,
               r.pageId,
               r.sopCode,
@@ -3605,14 +4201,17 @@
               r.dueDate,
               r.status,
               r.signedUtc || "",
-              r.sha256 || ""
+              r.sha256 || "",
+              SIMULATION_NOTICE_VALUE
             ]
               .map(csvCell)
               .join(",")
           );
         });
         const csvContent = lines.join("\r\n") + "\r\n";
-        const filename = "PolicyPulse_ISO27001_Clause7.3_Evidence_2026-11-24.csv";
+        const utcDate = getTodayUtcDateStr();
+        const filename =
+          "PolicyPulse_Simulation_ISO27001_Clause7.3_" + appState.spaceKey + "_" + utcDate + ".csv";
         const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
         const blobUrl = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -3628,35 +4227,49 @@
         const exportManifestHash = sha256Hex(csvContent);
         window.__qaTelemetry.downloads.push({
           filename: filename,
-          rowCount: AUDIT_RECORDS.length,
+          rowCount: filteredRecords.length,
           byteLength: csvContent.length,
           sha256: exportManifestHash,
           headerCols: headers.length
         });
         document.getElementById("kpi-export-sub").textContent =
-          "Exported " + filename + " (" + AUDIT_RECORDS.length + " rows)";
+          "Exported " + filename + " (" + filteredRecords.length + " sample rows)";
         showToast(
-          "Exported ISO 27001 Auditor CSV",
-          filename + " downloaded (" + AUDIT_RECORDS.length + " records · manifest sha256:" + exportManifestHash.slice(0, 12) + "…).",
+          "Exported Simulated Auditor CSV",
+          filename +
+            " downloaded (" +
+            filteredRecords.length +
+            " sample records · manifest sha256:" +
+            exportManifestHash.slice(0, 12) +
+            "… · simulation data only).",
           "verified"
         );
-        window.__qaTelemetry.interactions.push("exportCsv:" + AUDIT_RECORDS.length);
+        window.__qaTelemetry.interactions.push("exportCsv:" + filteredRecords.length);
       });
 
       window.__policyPulseApi = {
         buildReceiptPayload: buildReceiptPayload,
         sha256Hex: sha256Hex,
+        csvCell: csvCell,
+        isDangerousFormulaPrefix: isDangerousFormulaPrefix,
+        getOverdueDaysUtc: getOverdueDaysUtc,
+        escapeHtml: escapeHtml,
+        getFilteredAuditRecords: getFilteredAuditRecords,
         getState: function () {
           return Object.assign({}, appState, {
-            alexRecord: Object.assign({}, AUDIT_RECORDS[0]),
-            auditRecords: AUDIT_RECORDS.map(function (r) {
-              return Object.assign({}, r);
+            alexRecord: cloneRecord(AUDIT_RECORDS[0]),
+            auditRecords: AUDIT_RECORDS.map(cloneRecord),
+            attestationHistory: attestationHistory.map(function (h) {
+              return Object.assign({}, h);
             })
           });
         }
       };
 
       /* Initial Render */
+      syncDynamicSlaButtons();
+      syncSpaceChrome();
+      updateGuardHelperText();
       renderSopTree();
       renderBylineState();
       renderAuditorMatrix();
